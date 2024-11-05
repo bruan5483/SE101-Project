@@ -13,7 +13,7 @@ Dependencies:
 - pip install keyboard
 """
 
-# stops program if more 1 minute is taken 
+# stops program if more than 1 minute is taken 
 MAX_ELAPSE_TIME = 60
 
 # get size of screen
@@ -38,7 +38,7 @@ count = 1
 prev_screenshot = None
 while time.time() - start_time < MAX_ELAPSE_TIME:
     print(count)
-    # fail safe, stops program if space bar is pressed 
+    # fail safe, stops program if control key is pressed 
     if keyboard.is_pressed('ctrl'):
         break
 
