@@ -1,3 +1,12 @@
+from dotenv import load_dotenv, dotenv_values
+import os
+
+# load dotenv
+load_dotenv()
+
+merge_file_path = os.getenv("MERGE_FILE_PATH")
+
+
 def parse_mergefile(toedit,mergefile):
     readingcode = open(toedit,"r")
     cached_codefile=readingcode.readlines()
@@ -17,7 +26,7 @@ def parse_mergefile(toedit,mergefile):
     print (updated_codefile)
     update_codefile(updated_codefile,toedit)
 
-def parse_line(l)->(int,int,str):
+def parse_line(l)->(int, int, str):
     splitstring=l.split(',')
     #add error detection
     linenum=int(splitstring[0])
@@ -52,7 +61,7 @@ def update_codefile(contents,writepath):
     with open(writepath,"w") as writefile:
         writefile.writelines(contents)
 
-file_to_edit="codestuff.c"
+file_to_edit="src/codestuff.c"
 
 
-parse_mergefile(file_to_edit,"tomerge.txt")
+parse_mergefile(file_to_edit, merge_file_path)
