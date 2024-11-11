@@ -61,7 +61,7 @@ def update_codefile(contents,writepath):
     with open(writepath,"w") as writefile:
         writefile.writelines(contents)
 
-file_to_edit="src/codestuff.c"
+file_to_edit="./codestuff.c"
 
 
 parse_mergefile(file_to_edit, merge_file_path)
