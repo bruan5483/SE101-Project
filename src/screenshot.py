@@ -26,7 +26,7 @@ def scroll(height):
 
 
 
-file_path = "C:\\Users\\zroy1\\SE101\\se101-f2024-triangles\\triangle.c"
+file_path = "./screenshot.py"
 os.system(f'code {file_path}')
 start_time = time.time()
 
