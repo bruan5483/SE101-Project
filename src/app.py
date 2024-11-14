@@ -14,6 +14,11 @@ app = Flask(__name__)
 def main():
     return render_template("index.html")
 
+@app.route("/code")
+def code():
+
+    pass
+
 @app.route("/success", methods = ["POST"])
 def success():
     if request.method == "POST":
@@ -23,7 +28,6 @@ def success():
         time.sleep(5)
 
         redirect("/code")
-    
 
         return render_template("fileUploadSuccess.html", filename=f.filename)
 

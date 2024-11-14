@@ -6,8 +6,7 @@ load_dotenv()
 
 merge_file_path = os.getenv("MERGE_FILE_PATH")
 
-
-def parse_mergefile(toedit,mergefile):
+def parse_mergefile(toedit, mergefile):
     readingcode = open(toedit,"r")
     cached_codefile=readingcode.readlines()
     readingcode.close()

@@ -61,5 +61,3 @@ def parseAll():
                 filePath = jpgToPng(filePath)
 
             parseImage(filePath)
-
-parseAll()
