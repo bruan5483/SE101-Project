@@ -13,29 +13,32 @@ Dependencies:
 - pip install keyboard
 """
 
-def getScreenshots(MAX_ELAPSED_TIME=60):
-    # get size of screen
-    monitor = get_monitors()[0]
-    width = monitor.width
-    height = monitor.height
-    print(f"Screen resolution: {width}x{height}")
-    def scroll(height):
-        pyautogui.scroll(height)
+# file_path = "C:\\Users\\haris\\OneDrive\\Desktop\\SE101\\se101-f2024-triangles\\triangle.c"
 
+# stops program if more 1 minute is taken 
+MAX_ELAPSE_TIME = 60
 
-    file_path = "./screenshot.py"
+# get size of screen
+monitor = pyautogui.size()
+width = monitor[0]
+height = monitor[1]
+print(f"Screen resolution: {width}x{height}")
+
+def scroll(height):
+    pyautogui.scroll(height)
+
+def image_to_bytes(image):
+    return list(image.getdata())
+
+def screenshotCapture(file_path):
     os.system(f'code {file_path}')
     start_time = time.time()
-
-
-    def image_to_bytes(image):
-        return list(image.getdata())
-
     count = 1
     prev_screenshot = None
-    while time.time() - start_time < MAX_ELAPSED_TIME:
+    time.sleep(5)
+    while time.time() - start_time < MAX_ELAPSE_TIME:
         print(count)
-        # fail safe, stops program if control key is pressed 
+        # fail safe, stops program if space bar is pressed 
         if keyboard.is_pressed('ctrl'):
             break
 
@@ -51,4 +54,7 @@ def getScreenshots(MAX_ELAPSED_TIME=60):
         screenshot.save(img_path)
         scroll(-height)
         count += 1
-        time.sleep(0.1)
+        time.sleep(0.5)
+
+# below is an example call of the function
+# screenshotCapture("C:\\Users\\haris\\OneDrive\\Desktop\\SE101\\se101-f2024-triangles\\triangle.c")
