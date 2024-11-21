@@ -1,0 +1,14 @@
+[Unit]
+Description=Run Flask server and WiFi check
+After=network.target
+
+[Service]
+ExecStart=/home/ronak/Desktop/project-code/shellScripts/wifi_check.sh
+WorkingDirectory=/home/ronak/Desktop/project-code
+User=ronak
+Environment="DISPLAY=:0"
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

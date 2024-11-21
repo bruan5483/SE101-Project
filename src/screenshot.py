@@ -1,9 +1,16 @@
+import os 
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DISPLAY = os.getenv('DISPLAY')
+os.environ['DISPLAY'] = DISPLAY
+
 from PIL import ImageGrab
 import pyautogui
-from screeninfo import get_monitors
+from screeninfo import get_monitors, Monitor
 import keyboard
-import time 
-import os 
+import time
 
 """
 Dependencies:
@@ -12,49 +19,66 @@ Dependencies:
 - pip install screeninfo
 - pip install keyboard
 """
+WIDTH = 1024
+HEIGHT = 768
+X_POSITION = 10
+Y_POSITION = 10
 
-# file_path = "C:\\Users\\haris\\OneDrive\\Desktop\\SE101\\se101-f2024-triangles\\triangle.c"
+monitor = Monitor(
+        x=X_POSITION,
+        y=Y_POSITION,
+        width=WIDTH,
+        height=HEIGHT
+    )
 
-# stops program if more 1 minute is taken 
-MAX_ELAPSE_TIME = 60
+def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
+    # get size of screen
 
-# get size of screen
-monitor = pyautogui.size()
-width = monitor[0]
-height = monitor[1]
-print(f"Screen resolution: {width}x{height}")
+    # def scroll(height):
+    #     pyautogui.scroll(height)
 
-def scroll(height):
-    pyautogui.scroll(height)
+    os.system(f"export DISPLAY={DISPLAY}")
+    # * Enable on prod
+    # os.system("sudo pkill code")
+    os.system(f"code {code_file_path}")
 
-def image_to_bytes(image):
-    return list(image.getdata())
 
-def screenshotCapture(file_path):
-    os.system(f'code {file_path}')
+    time.sleep(10)
+    keyboard.left_click()
+    
     start_time = time.time()
-    count = 1
+
+
+    def image_to_bytes(image):
+        return list(image.getdata())
+
+    count = 0
     prev_screenshot = None
-    time.sleep(5)
-    while time.time() - start_time < MAX_ELAPSE_TIME:
+
+
+    # while time.time() - start_time < MAX_ELAPSED_TIME:
+    while True:
         print(count)
-        # fail safe, stops program if space bar is pressed 
-        if keyboard.is_pressed('ctrl'):
+        if (keyboard.terminate):
             break
 
         # take screenshot 
-        screenshot = ImageGrab.grab(bbox =(0.04 * width, 0.075 * height, 0.85 * width, 0.95 * height))
+        screenshot = ImageGrab.grab(bbox =(0, 0, WIDTH, HEIGHT))
+        
         # if the two screenshots are the same that means we've reached the end of our scrollable area 
-        if image_to_bytes(screenshot) == prev_screenshot:
-            print("stopped")
+        if count > 0 and image_to_bytes(screenshot) == prev_screenshot:
             break
 
         prev_screenshot = image_to_bytes(screenshot)
-        img_path = f"..\\screenshots\\pic{count}.jpg"
+        img_path = os.path.join(images_dir_path, f"pic_{count}.png")
+        
+        time.sleep(5)
         screenshot.save(img_path)
-        scroll(-height)
+        keyboard.scroll(0, -13)
+        # time.sleep(2)
+        # pyautogui.scroll(5)
         count += 1
-        time.sleep(0.5)
+
 
 # below is an example call of the function
-# screenshotCapture("C:\\Users\\haris\\OneDrive\\Desktop\\SE101\\se101-f2024-triangles\\triangle.c")
+# getScreenshots("/home/ronak/Desktop/project-code/utils/files/app.py", "/home/ronak/Desktop/project-code/utils/codeImages/")
