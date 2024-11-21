@@ -1,7 +1,7 @@
 from google.cloud import vision
 
-def detect_document(path, output_file):
-    """Detects document features in an image and writes the detected text to a file without confidence."""
+def get_text(path, output_file):
+    
     client = vision.ImageAnnotatorClient()
 
     with open(path, "rb") as image_file:
@@ -27,7 +27,8 @@ def detect_document(path, output_file):
             "https://cloud.google.com/apis/design/errors".format(response.error.message)
         )
 
-detect_document(
+# Example
+get_text(
     "/Users/bryant.ruan/Desktop/SE101/SE101-Project/se101-team-21/SE101_OCR/images/IMG_0029.jpg",
     "/Users/bryant.ruan/Desktop/SE101/SE101-Project/se101-team-21/SE101_OCR/images/detected_text.txt"
 )
