@@ -1,2 +1,4 @@
 venv
 utils/google_ocr_service_token.json
+SE101_OCR/bin
+SE101_OCR/google-cloud-sdk
