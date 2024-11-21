@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export GOOGLE_APPLICATION_CREDENTIALS="/home/ronak/Desktop/project-code/utils/google_ocr_service_token.json"
+export DISPLAY=":1"
+
 
 while true; do
         if ping -c 1 google.com &> /dev/null; then
