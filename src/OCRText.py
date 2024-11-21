@@ -27,8 +27,3 @@ def getText(path, output_file):
             "https://cloud.google.com/apis/design/errors".format(response.error.message)
         )
 
-# Example
-# getText(
-#     "/home/ronak/Desktop/project-code/utils/images/IMG_0029.jpg",
-#     "/home/ronak/Desktop/project-code/utils/images/detected_text.txt"
-# )
