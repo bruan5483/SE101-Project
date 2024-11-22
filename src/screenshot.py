@@ -58,7 +58,6 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
 
     # while time.time() - start_time < MAX_ELAPSED_TIME:
     while True:
-        print(count)
         if (keyboard.terminate):
             break
 
