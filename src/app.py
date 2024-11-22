@@ -52,6 +52,8 @@ def code(filename, imageIndex):
             code_file_path=file_path,
             images_dir_path=CODE_IMAGES_DIR_PATH
         )
+
+    time.sleep(10)
     
     thread = Thread(target=background_task)
     thread.start()
