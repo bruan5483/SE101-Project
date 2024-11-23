@@ -32,7 +32,6 @@ def success():
     if request.method == "POST":
         # remove all images in images dir
         imageProcessing.pruneDir(CODE_IMAGES_DIR_PATH)
-        imageProcessing.pruneDir(CODE_IMAGES_DIR_PATH)
         
         f = request.files["file"]
         f.save(os.path.join(FILE_UPLOAD_DIR, f.filename))
