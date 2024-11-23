@@ -6,6 +6,7 @@ from fileinput import filename
 from dotenv import load_dotenv
 from threading import Thread
 import time
+import imageDisplay
 
 # import custom modules
 import screenshot
@@ -68,6 +69,8 @@ if (__name__ == "__main__"):
     
     #* enable on prod
     #os.system("sudo pkill code")
+
+    # open blank image
 
     port = 8000
     # app.run(host="0.0.0.0", port=port)
