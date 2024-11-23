@@ -7,7 +7,8 @@
     <body>
         <h1>Image index {{imageIndex}}</h1>
         
-        <img src='/static/codeImages_pic_{{ imageIndex }}.png'>
+        <img id="code-image" src='/static/codeImages_pic_{{ imageIndex }}.png'>
+        <h1 id="no-image-message">Your images will be ready soon</h1>
         
         <br/>
 
@@ -19,6 +20,13 @@
         const maxIndex = {{ maxIndex }};
         const imageIndex = {{ imageIndex }};
         
+        if (maxIndex === 0) {
+            document.getElementById("code-image").style.display = "none"
+        }
+        else {
+            document.getElementById("no-image-message").style.display = "none"
+        }
+
         if (imageIndex <= 0) {
             document.getElementById("prev-image-button").style.display = "none";
         }
