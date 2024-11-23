@@ -31,6 +31,8 @@ monitor = Monitor(
         height=HEIGHT
     )
 
+static_dir_path = os.getenv("STATIC_DIR_PATH")
+
 def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
     # get size of screen
 
@@ -45,9 +47,6 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
 
     time.sleep(10)
     keyboard.left_click()
-    
-    start_time = time.time()
-
 
     def image_to_bytes(image):
         return list(image.getdata())
@@ -55,7 +54,6 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
     count = 0
     prev_screenshot = None
     first = True
-
 
     # while time.time() - start_time < MAX_ELAPSED_TIME:
     while True:
@@ -72,11 +70,12 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
 
         prev_screenshot = image_to_bytes(screenshot)
         img_path = os.path.join(images_dir_path, f"pic_{count}.png")
+        static_img_path = os.path.join(static_dir_path, f"codeImages_pic_{count}.png")
         
         time.sleep(5.3)
         # if not first:
         screenshot.save(img_path)
-        screenshot.save(f"static/codeImages_pic_{count}.png")
+        screenshot.save(static_img_path)
         # else:
         #     first = False
         keyboard.scroll(0, -13)

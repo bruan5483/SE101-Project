@@ -1,5 +1,5 @@
 import os
-os.system("export DISPLAY=:0")
+os.system("export DISPLAY=:1")
 
 from flask import *
 from fileinput import filename
