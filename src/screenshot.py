@@ -54,10 +54,12 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
 
     count = 0
     prev_screenshot = None
+    first = True
 
 
     # while time.time() - start_time < MAX_ELAPSED_TIME:
     while True:
+        print(count)
         if (keyboard.terminate):
             break
 
@@ -71,8 +73,11 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
         prev_screenshot = image_to_bytes(screenshot)
         img_path = os.path.join(images_dir_path, f"pic_{count}.png")
         
-        time.sleep(5)
+        time.sleep(5.3)
+        # if not first:
         screenshot.save(img_path)
+        # else:
+        #     first = False
         keyboard.scroll(0, -13)
         # time.sleep(2)
         # pyautogui.scroll(5)

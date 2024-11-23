@@ -5,13 +5,25 @@
     </head>
 
     <body>
-        <title>Image index {{imageIndex}}</title>
-        {% if imageIndex > 0 %}
-        <button>Prev Image</button>
-        {% endif %}
+        <h1>Image index {{imageIndex}}</h1>
+        <button id="prev-image-button">Prev Image</button>
 
-        {% if imageIndex < maxIndex %}
-        <button>Next Image</button>
-        {% endif %}
+        <button id="next-image-button">Next Image</button>
     </body>
+
+    <script>
+        const maxIndex = {{ maxIndex }};
+        const imageIndex = {{ imageIndex }};
+        console.log(maxIndex, imageIndex);
+        if (imageIndex <= 0) {
+            document.getElementById("prev-image-button").style.display = "none";
+        }
+        if (imageIndex >= maxIndex) {
+            document.getElementById("next-image-button").style.display = "none";
+        }
+
+        setInterval(() => {
+            location.reload();
+        }, 5000);
+    </script>
 </html>

@@ -35,7 +35,18 @@ def success():
         
         f = request.files["file"]
         f.save(os.path.join(FILE_UPLOAD_DIR, f.filename))
-
+        
+        file_path = os.path.join(FILE_UPLOAD_DIR, f.filename)
+        def background_task():
+            screenshot.getScreenshots(
+                MAX_ELAPSED_TIME=MAX_ELAPSED_TIME,
+                code_file_path=file_path,
+                images_dir_path=CODE_IMAGES_DIR_PATH
+            )
+        
+        thread = Thread(target=background_task)
+        thread.start()
+        
         return render_template("fileUploadSuccess.html", filename=f.filename)
 
 
@@ -46,17 +57,6 @@ def code(filename, imageIndex):
         
     imageIndex = imageProcessing.validateImageIndex(CODE_IMAGES_DIR_PATH, imageIndex)
 
-    def background_task():
-        screenshot.getScreenshots(
-            MAX_ELAPSED_TIME=MAX_ELAPSED_TIME,
-            code_file_path=file_path,
-            images_dir_path=CODE_IMAGES_DIR_PATH
-        )
-
-    time.sleep(10)
-    
-    thread = Thread(target=background_task)
-    thread.start()
     
     return render_template("code.html", filename=filename, imageIndex=imageIndex, maxIndex=len(os.listdir(CODE_IMAGES_DIR_PATH)))
 
@@ -64,12 +64,12 @@ def code(filename, imageIndex):
 
 if (__name__ == "__main__"):
     
-    # kill exisiting instances of code
-    # os.system("sudo pkill code")
     #* enable on prod
-    # os.system("tigervncserver")
+    #os.system("sudo pkill code")
 
     port = 8000
+    # app.run(host="0.0.0.0", port=port)
+
     while 1:
         try: 
             app.run(host="0.0.0.0", port=port)
