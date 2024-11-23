@@ -1,6 +1,7 @@
 import pynput
 # from pynput.keyboard import Key, Listener, Controller
 from threading import Thread
+import time
 
 global terminate
 terminate = False
@@ -32,10 +33,10 @@ def listen():
         listener.join()
 
 def pressKey_f11():
-    keyboard.press(pynput.keyboard.Key.f11)
+    keyboard.tap(pynput.keyboard.Key.f11)
 
 def pressKey_esc():
-    keyboard.press(pynput.keyboard.Key.esc)
+    keyboard.tap(pynput.keyboard.Key.esc)
 
 def scroll(x, y):
     mouse.scroll(x, y)
