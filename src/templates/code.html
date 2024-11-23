@@ -6,15 +6,19 @@
 
     <body>
         <h1>Image index {{imageIndex}}</h1>
-        <button id="prev-image-button">Prev Image</button>
+        
+        <img src='/static/codeImages_pic_{{ imageIndex }}.png'>
+        
+        <br/>
 
+        <button id="prev-image-button">Prev Image</button>
         <button id="next-image-button">Next Image</button>
     </body>
 
     <script>
         const maxIndex = {{ maxIndex }};
         const imageIndex = {{ imageIndex }};
-        console.log(maxIndex, imageIndex);
+        
         if (imageIndex <= 0) {
             document.getElementById("prev-image-button").style.display = "none";
         }

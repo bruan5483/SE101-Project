@@ -9,13 +9,13 @@ import time
 
 # import custom modules
 import screenshot
-
 import imageProcessing
 
 # Variables
 load_dotenv()
 
 MAX_ELAPSED_TIME = 1
+RELATIVE_CODE_IMAGES_DIR_PATH = os.getenv("IMAGES_DIR_RELATIVE_PATH")
 CODE_IMAGES_DIR_PATH = os.getenv("IMAGES_DIR_PATH")
 FILE_UPLOAD_DIR = os.getenv("FILE_UPLOAD_DIR_PATH")
 # end Variables
@@ -31,6 +31,7 @@ def main():
 def success():
     if request.method == "POST":
         # remove all images in images dir
+        imageProcessing.pruneDir(CODE_IMAGES_DIR_PATH)
         imageProcessing.pruneDir(CODE_IMAGES_DIR_PATH)
         
         f = request.files["file"]
@@ -56,9 +57,10 @@ def code(filename, imageIndex):
     imageIndex = int(imageIndex)
         
     imageIndex = imageProcessing.validateImageIndex(CODE_IMAGES_DIR_PATH, imageIndex)
-
     
-    return render_template("code.html", filename=filename, imageIndex=imageIndex, maxIndex=len(os.listdir(CODE_IMAGES_DIR_PATH)))
+    return render_template("code.html", filename=filename, imageIndex=imageIndex, maxIndex=len(os.listdir(CODE_IMAGES_DIR_PATH)),
+                        #    filepath=os.path.join("/utils/codeImages", filename)
+                        )
 
 
 

@@ -76,6 +76,7 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
         time.sleep(5.3)
         # if not first:
         screenshot.save(img_path)
+        screenshot.save(f"static/codeImages_pic_{count}.png")
         # else:
         #     first = False
         keyboard.scroll(0, -13)
