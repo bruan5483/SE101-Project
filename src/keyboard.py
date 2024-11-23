@@ -3,46 +3,47 @@ import pynput
 from threading import Thread
 import time
 
-global terminate
-terminate = False
+class Keyboard:
 
-keyboard = pynput.keyboard.Controller()
-mouse = pynput.mouse.Controller()
+    def __init__(self):
+        self.terminate = False
+        self.keyboard = pynput.keyboard.Controller()
+        self.mouse = pynput.mouse.Controller()
 
-def on_press(key):
-    #print('{0} pressed'.format(
-        #key))
-    check_key(key)
+        thread = Thread(target=self.listen)
 
-def on_release(key):
-    #print('{0} release'.format(
-       # key))
-    if key == pynput.keyboard.Key.esc:
-        # Stop listener
-        return False
+    def on_press(self, key):
+        #print('{0} pressed'.format(
+            #key))
+        self.check_key(key)
 
-def check_key(key):
-    if key == pynput.keyboard.Key.ctrl:
-        terminate = True
+    def on_release(self, key):
+        #print('{0} release'.format(
+        # key))
+        if key == pynput.keyboard.Key.esc:
+            # Stop listener
+            return False
 
-def listen():
-    # Collect events until released
-    with pynput.keyboard.Listener(
-            on_press=on_press,
-            on_release=on_release) as listener:
-        listener.join()
+    def check_key(self, key):
+        if key == pynput.keyboard.Key.ctrl:
+            terminate = True
 
-def pressKey_f11():
-    keyboard.tap(pynput.keyboard.Key.f11)
+    def listen(self):
+        # Collect events until released
+        with pynput.keyboard.Listener(
+                on_press=self.on_press,
+                on_release=self.on_release) as listener:
+            listener.join()
 
-def pressKey_esc():
-    keyboard.tap(pynput.keyboard.Key.esc)
+    def pressKey_f11(self):
+        self.keyboard.tap(pynput.keyboard.Key.f11)
 
-def scroll(x, y):
-    mouse.scroll(x, y)
+    def pressKey_esc(self):
+        self.keyboard.tap(pynput.keyboard.Key.esc)
 
-def left_click():
-    mouse.click(pynput.mouse.Button.left)
+    def scroll(self, x, y):
+        self.mouse.scroll(x, y)
 
+    def left_click(self):
+        self.mouse.click(pynput.mouse.Button.left)
 
-thread = Thread(target=listen)

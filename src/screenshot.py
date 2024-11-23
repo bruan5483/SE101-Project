@@ -34,19 +34,21 @@ monitor = Monitor(
 static_dir_path = os.getenv("STATIC_DIR_PATH")
 
 def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
+    
+    
     # get size of screen
 
     # def scroll(height):
     #     pyautogui.scroll(height)
 
-    os.system(f"export DISPLAY={DISPLAY}")
+    # os.environ["DISPLAY"] = DISPLAY
     # * Enable on prod
     # os.system("sudo pkill code")
     os.system(f"code {code_file_path}")
 
-
+    kb = keyboard.Keyboard()
     time.sleep(10)
-    keyboard.left_click()
+    kb.left_click()
 
     def image_to_bytes(image):
         return list(image.getdata())
@@ -58,7 +60,7 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
     # while time.time() - start_time < MAX_ELAPSED_TIME:
     while True:
         print(count)
-        if (keyboard.terminate):
+        if (kb.terminate):
             break
 
         # take screenshot 
@@ -78,7 +80,7 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
         screenshot.save(static_img_path)
         # else:
         #     first = False
-        keyboard.scroll(0, -13)
+        kb.scroll(0, -13)
         # time.sleep(2)
         # pyautogui.scroll(5)
         count += 1

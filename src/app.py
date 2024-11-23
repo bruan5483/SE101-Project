@@ -19,6 +19,7 @@ MAX_ELAPSED_TIME = 1
 RELATIVE_CODE_IMAGES_DIR_PATH = os.getenv("IMAGES_DIR_RELATIVE_PATH")
 CODE_IMAGES_DIR_PATH = os.getenv("IMAGES_DIR_PATH")
 FILE_UPLOAD_DIR = os.getenv("FILE_UPLOAD_DIR_PATH")
+STATIC_DIR_PATH = os.getenv("STATIC_DIR_PATH")
 # end Variables
 
 app = Flask(__name__)
@@ -54,9 +55,9 @@ def success():
 
 @app.route("/code/<filename>/<imageIndex>")
 def code(filename, imageIndex):
-    file_path = os.path.join(FILE_UPLOAD_DIR, filename)
+    # file_path = os.path.join(FILE_UPLOAD_DIR, filename)
+    
     imageIndex = int(imageIndex)
-        
     imageIndex = imageProcessing.validateImageIndex(CODE_IMAGES_DIR_PATH, imageIndex)
     
     return render_template("code.html", filename=filename, imageIndex=imageIndex, maxIndex=len(os.listdir(CODE_IMAGES_DIR_PATH)),
@@ -71,6 +72,11 @@ if (__name__ == "__main__"):
     #os.system("sudo pkill code")
 
     # open blank image
+    # async def open_initial_image():
+    #     await imageDisplay.open_image(os.path.join(STATIC_DIR_PATH, "initial-image.png"))
+    # open_initial_image()
+
+    imageDisplay.open_image(os.path.join(STATIC_DIR_PATH, "initial-image.png"))
 
     port = 8000
     # app.run(host="0.0.0.0", port=port)
