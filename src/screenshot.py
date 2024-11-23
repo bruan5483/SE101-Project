@@ -83,6 +83,7 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
         # time.sleep(2)
         # pyautogui.scroll(5)
         count += 1
+    print("done")
 
 
 # below is an example call of the function

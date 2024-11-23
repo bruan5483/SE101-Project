@@ -44,6 +44,7 @@ def success():
                 images_dir_path=CODE_IMAGES_DIR_PATH
             )
         
+        global thread
         thread = Thread(target=background_task)
         thread.start()
         

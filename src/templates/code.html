@@ -12,11 +12,12 @@
         
         <br/>
 
-        <button id="prev-image-button">Prev Image</button>
-        <button id="next-image-button">Next Image</button>
+        <button id="prev-image-button", onclick="changeIndex(-1)">Prev Image</button>
+        <button id="next-image-button", onclick="changeIndex(1)">Next Image</button>
     </body>
 
     <script>
+        
         const maxIndex = {{ maxIndex }};
         const imageIndex = {{ imageIndex }};
         
@@ -26,16 +27,26 @@
         else {
             document.getElementById("no-image-message").style.display = "none"
         }
-
+        
         if (imageIndex <= 0) {
             document.getElementById("prev-image-button").style.display = "none";
         }
         if (imageIndex >= maxIndex) {
             document.getElementById("next-image-button").style.display = "none";
         }
-
+        
         setInterval(() => {
             location.reload();
         }, 5000);
-    </script>
+
+
+        function changeIndex(delta) {
+            const newIndex = imageIndex + delta;
+            console.log(newIndex)
+            window.location.href=`/code/{{ filename }}/${newIndex}`
+            // window.location.href("/code/{{ filename }}/{{ newIndex }}")
+        }
+
+
+        </script>
 </html>
