@@ -1,0 +1,6 @@
+# (1) this is a for loop
+// 2 printing i
+2 test
+(3) testing 
+# ((3 hello))
+//  ((10 10 please be right))

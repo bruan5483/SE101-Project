@@ -18,17 +18,18 @@ def parse_mergefile(toedit, mergefile):
     with open(mergefile) as tomerge:
         for line in tomerge:
             print(line)
-            parsedline=parse_line(line.rstrip())
+            parsedline=parse_line(line.rstrip(), toedit)
             print(parsedline)
             updated_codefile=update_contents(parsedline,updated_codefile)
     
     print (updated_codefile)
     update_codefile(updated_codefile,toedit)
 
-def parse_line(l)->(int, int, str):
+def parse_line(l, toedit)->(int, int, str):
+    print(l)
     splitstring=l.split(',')
     #add error detection
-    linenum=int(splitstring[0])
+    linenum=int(splitstring[0]) - 1 # start from 1 index for line num
     index=int(splitstring[1])
 
     stuff=splitstring[2]
@@ -37,11 +38,29 @@ def parse_line(l)->(int, int, str):
 
     stuff=stuff.replace("[newline]", "\n")
 
-    stuff=stuff.replace("[comment]", " //") #relace with function to get correct comment characters
+    comment_char = getCommentChar(toedit)
+    stuff=stuff.replace("[comment]", comment_char) #relace with function to get correct comment characters
 
     #add other parsing features
 
     return (linenum,index,stuff)
+
+def getCommentChar(code_file):
+    commentChar = {"py": " #", 
+                   "c": " //",
+                   "cpp": " //",
+                   "cc": " //",
+                   "java": " //",
+                   "js": " //",
+                   "sql": " --",
+                   "rb": " //",
+                   "r": " #"}
+    
+    language = code_file.split(".")[-1]
+    if language in commentChar:
+        return commentChar[language]
+    # default comment type 
+    return " //"
 
 def update_contents(tochange:tuple[int,int,str],contents):
     if (tochange[1]==-1):
@@ -49,7 +68,7 @@ def update_contents(tochange:tuple[int,int,str],contents):
         contents[tochange[0]]+=tochange[2]
 
     elif (tochange[1]==0):
-        contents.insert(tochange[0]-1,tochange[2])
+        contents.insert(tochange[0],tochange[2])
     
     #else:
         #handle inserting to the middle of a line
@@ -63,4 +82,6 @@ def update_codefile(contents,writepath):
 file_to_edit="./codestuff.c"
 
 
-parse_mergefile(file_to_edit, merge_file_path)
+# parse_mergefile(file_to_edit, merge_file_path)
+parse_mergefile("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\codefile.py",
+                "C:/Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt")
