@@ -3,14 +3,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DISPLAY = os.getenv('DISPLAY')
-os.environ['DISPLAY'] = DISPLAY
-
 from PIL import ImageGrab
 import pyautogui
 from screeninfo import get_monitors, Monitor
 import keyboard
 import time
+import buffer
+
+from logger_config import log_function_calls
+from logger_config import setup_logger
+
+setup_logger()
 
 """
 Dependencies:
@@ -31,35 +34,50 @@ monitor = Monitor(
         height=HEIGHT
     )
 
-def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
-    # get size of screen
+static_dir_path = os.getenv("STATIC_DIR_PATH")
 
-    # def scroll(height):
-    #     pyautogui.scroll(height)
+def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_ELAPSED_TIME=300):
+    
+    buffer.appendRequest("open-vscode")
+    # wait until we reach buffer
+    while (not buffer.isNext("open-vscode")):
+        time.sleep(0.1)
 
-    os.system(f"export DISPLAY={DISPLAY}")
+    os.environ["DISPLAY"] = ":1"
+    
+
     # * Enable on prod
     # os.system("sudo pkill code")
     os.system(f"code {code_file_path}")
 
-
+    kb = keyboard.pynputKeyboard()
     time.sleep(10)
-    keyboard.left_click()
-    
-    start_time = time.time()
+    kb.left_click()
 
+    buffer.completeEvent()
 
     def image_to_bytes(image):
         return list(image.getdata())
 
     count = 0
     prev_screenshot = None
-
+    first = True
 
     # while time.time() - start_time < MAX_ELAPSED_TIME:
     while True:
+        buffer.appendRequest("screenshot")
+        # wait until we reach buffer
+        while (not buffer.isNext("screenshot")):
+            time.sleep(0.3)
+
+        os.environ["DISPLAY"] = ":1"
+        
+        kb = keyboard.pynputKeyboard()
+
+        #debug
         print(count)
-        if (keyboard.terminate):
+        
+        if (kb.terminate):
             break
 
         # take screenshot 
@@ -71,13 +89,23 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
 
         prev_screenshot = image_to_bytes(screenshot)
         img_path = os.path.join(images_dir_path, f"pic_{count}.png")
+        static_img_path = os.path.join(static_dir_path, f"codeImages_pic_{count}.png")
         
-        time.sleep(5)
+        time.sleep(5.3)
+        # if not first:
         screenshot.save(img_path)
-        keyboard.scroll(0, -13)
+        screenshot.save(static_img_path)
+        time.sleep(5.3)
+        # else:
+        #     first = False
+        kb.scroll(0, -13)
         # time.sleep(2)
         # pyautogui.scroll(5)
         count += 1
+
+        buffer.completeEvent()
+
+    print("done")
 
 
 # below is an example call of the function

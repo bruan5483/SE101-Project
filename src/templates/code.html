@@ -5,13 +5,49 @@
     </head>
 
     <body>
-        <!-- <p>Image index {{imageIndex}}</p>
-        {% if imageIndex > 0 %}
-        <button>Prev Image</button>
-        {% endif %}
+        <h1>Image index {{imageIndex}}</h1>
+        
+        <img id="code-image" src='/static/codeImages_pic_{{ imageIndex }}.png'>
+        <h1 id="no-image-message">Your images will be ready soon</h1>
+        
+        <br/>
 
-        {% if imageIndex < maxIndex %}
-        <button>Next Image</button>
-        {% endif %} -->
+        <button id="prev-image-button", onclick="changeIndex(-1)">Prev Image</button>
+        <button id="next-image-button", onclick="changeIndex(1)">Next Image</button>
     </body>
+
+    <script>
+        
+        const maxIndex = {{ maxIndex }};
+        const imageIndex = {{ imageIndex }};
+        const reloadTime = 10000;
+        
+        if (maxIndex === 0) {
+            document.getElementById("code-image").style.display = "none"
+        }
+        else {
+            document.getElementById("no-image-message").style.display = "none"
+        }
+        
+        if (imageIndex <= 0) {
+            document.getElementById("prev-image-button").style.display = "none";
+        }
+        if (imageIndex + 1 >= maxIndex) {
+            document.getElementById("next-image-button").style.display = "none";
+        }
+        
+        setInterval(() => {
+            location.reload();
+        }, 10000);
+
+
+        function changeIndex(delta) {
+            const newIndex = imageIndex + delta;
+            console.log(newIndex)
+            window.location.href=`/code/{{ filename }}/${newIndex}`
+            // window.location.href("/code/{{ filename }}/{{ newIndex }}")
+        }
+
+
+        </script>
 </html>

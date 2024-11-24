@@ -1,0 +1,6 @@
+2024-11-23 21:55:52,119 - Calling function 'display_fullscreen_image' with arguments ('/Users/bryant.ruan/Downloads/Bryant_Ruan.png',) and keyword arguments {}
+2024-11-23 21:55:54,514 - Function 'display_fullscreen_image' returned None
+2024-11-23 22:00:34,427 - Calling function 'display_fullscreen_image' with arguments ('/Users/bryant.ruan/Downloads/t.png',) and keyword arguments {}
+2024-11-23 22:00:36,270 - Function 'display_fullscreen_image' returned None
+2024-11-23 22:00:36,270 - Calling function 'jpgToPng' with arguments ('/Users/bryant.ruan/Downloads/w.jpg',) and keyword arguments {}
+2024-11-23 22:00:38,334 - Function 'jpgToPng' returned /Users/bryant.ruan/Downloads/w.png
