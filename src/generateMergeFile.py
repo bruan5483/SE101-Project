@@ -11,13 +11,13 @@ def parseOCR(ocr_file, tomerge_path):
         for line in lines:
             print(line.strip())
             # line number 
-            number = re.match(r'^\(*(\d+)\)*', line.strip())
+            number = re.match(r'^[^\w]*\s*(\d+)\)*', line.strip())
             if number:
                 number = number.group(1)
             else:
                 number = 1
             # body of text 
-            comment = re.search(r'\(*\d+\)*\s*(.*?)(\))*$', line.strip())
+            comment = re.search(r'[^\w]*\s*\d+\)*\s*(.*?)(\))*$', line.strip())
             if comment:
                 changes.append([number, comment.group(1)])
     

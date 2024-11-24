@@ -84,4 +84,4 @@ file_to_edit="./codestuff.c"
 
 # parse_mergefile(file_to_edit, merge_file_path)
 parse_mergefile("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\codefile.py",
-                "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt")
+                "C:/Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt")
