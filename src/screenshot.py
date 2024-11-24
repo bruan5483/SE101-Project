@@ -36,7 +36,6 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
     buffer.appendRequest("open-vscode")
     # wait until we reach buffer
     while (not buffer.isNext("open-vscode")):
-        print(buffer.buffer)
         time.sleep(0.1)
 
     os.environ["DISPLAY"] = ":1"
@@ -47,7 +46,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
     os.system(f"code {code_file_path}")
 
     kb = keyboard.pynputKeyboard()
-    time.sleep(4)
+    time.sleep(10)
     kb.left_click()
 
     buffer.completeEvent()
@@ -64,8 +63,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
         buffer.appendRequest("screenshot")
         # wait until we reach buffer
         while (not buffer.isNext("screenshot")):
-            print(buffer.buffer)
-            time.sleep(0.1)
+            time.sleep(0.3)
 
         os.environ["DISPLAY"] = ":1"
         
@@ -92,6 +90,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
         # if not first:
         screenshot.save(img_path)
         screenshot.save(static_img_path)
+        time.sleep(5.3)
         # else:
         #     first = False
         kb.scroll(0, -13)

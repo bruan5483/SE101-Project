@@ -31,6 +31,9 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
+    os.system("sudo pkill display")
+    time.sleep(0.1)
+    imageDisplay.open_image(os.path.join(STATIC_DIR_PATH, "initial-image.png"), buffer)
     return render_template("index.html")
 
 
@@ -66,8 +69,8 @@ def code(filename, imageIndex):
     image_path = os.path.join(STATIC_DIR_PATH, f"codeImages_pic_{imageIndex}.png")
     
     def open_image():
-        os.system("sudo pkill display")
-        time.sleep(0.1)
+        # os.system("sudo pkill display")
+        time.sleep(0.5)
         imageDisplay.open_image(image_path=image_path, buffer=buffer)
     
     if len(os.listdir(CODE_IMAGES_DIR_PATH)) > 0:
@@ -91,10 +94,10 @@ if (__name__ == "__main__"):
     # async def open_initial_image():
     #     await imageDisplay.open_image(os.path.join(STATIC_DIR_PATH, "initial-image.png"))
     # open_initial_image()
-
-    imageDisplay.open_image(os.path.join(STATIC_DIR_PATH, "initial-image.png"), buffer)
     
     port = 8000
+
+    imageDisplay.open_image(os.path.join(STATIC_DIR_PATH, "initial-image.png"), buffer)
     # app.run(host="0.0.0.0", port=port)
 
     while 1:
