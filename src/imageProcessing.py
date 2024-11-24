@@ -1,7 +1,13 @@
 from PIL import Image
 import os
 
+from logger_config import log_function_calls
+from logger_config import setup_logger
+
+setup_logger()
+
 # Converts jpg to png
+@log_function_calls()
 def jpgToPng(image):
     if os.path.splitext(image)[1] == ".png": return image
 
@@ -15,6 +21,7 @@ def jpgToPng(image):
     return newImage
 
 # Parses image by red and blue pixels
+@log_function_calls()
 def parseImage(image):
     baseDir = os.path.dirname(os.path.dirname(os.path.abspath(image)))
     folder = os.path.join(baseDir, "processedImages")
@@ -51,6 +58,7 @@ def parseImage(image):
     inputImageB.show()
 
 # Parses all images in the images directory
+@log_function_calls()
 def parseAll(dir):
     for file in os.listdir(dir):
         filePath = os.path.join(dir, file)
@@ -63,6 +71,7 @@ def parseAll(dir):
 
 
 # removes all current images in the image dir
+@log_function_calls()
 def pruneDir(dir_path):
     for fname in os.listdir(dir_path):
         file_path = os.path.join(dir_path, fname)
@@ -70,6 +79,7 @@ def pruneDir(dir_path):
 
 
 # checks if an index is valid in the images dir
+@log_function_calls()
 def validateImageIndex(images_dir, index) -> int:
     n = len(os.listdir(images_dir))
 
