@@ -29,7 +29,6 @@ def display_fullscreen_image(image_path):
     cv2.waitKey()  # Wait for a key press
     cv2.destroyAllWindows()  # Close the window
 
-# display_fullscreen_image("/home/ronak/Desktop/project-code/utils/codeImages/pic_0.png")
 
 def open_image(image_path, buffer: buffer.Buffer):
     try:
