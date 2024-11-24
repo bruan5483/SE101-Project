@@ -47,7 +47,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
     os.system(f"code {code_file_path}")
 
     kb = keyboard.pynputKeyboard()
-    time.sleep(10)
+    time.sleep(4)
     kb.left_click()
 
     buffer.completeEvent()

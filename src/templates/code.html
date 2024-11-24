@@ -20,6 +20,7 @@
         
         const maxIndex = {{ maxIndex }};
         const imageIndex = {{ imageIndex }};
+        const reloadTime = 10000;
         
         if (maxIndex === 0) {
             document.getElementById("code-image").style.display = "none"
@@ -37,7 +38,7 @@
         
         setInterval(() => {
             location.reload();
-        }, 5000);
+        }, 10000);
 
 
         function changeIndex(delta) {

@@ -66,14 +66,15 @@ def code(filename, imageIndex):
     image_path = os.path.join(STATIC_DIR_PATH, f"codeImages_pic_{imageIndex}.png")
     
     def open_image():
-        os.system("sudo pkill eog")
-        # imageDisplay.open_image(image_path=image_path, buffer=buffer)
+        os.system("sudo pkill display")
+        time.sleep(0.1)
+        imageDisplay.open_image(image_path=image_path, buffer=buffer)
     
-    # if len(os.listdir(CODE_IMAGES_DIR_PATH)) > 0:
-    #     global open_image_thread
-    #     open_image_thread = Thread(target=open_image)
-    #     open_image_thread.start()
-    #     # open_image(image_path)
+    if len(os.listdir(CODE_IMAGES_DIR_PATH)) > 0:
+        global open_image_thread
+        open_image_thread = Thread(target=open_image)
+        open_image_thread.start()
+        # open_image(image_path)
 
     return render_template("code.html", filename=filename, imageIndex=imageIndex, maxIndex=len(os.listdir(CODE_IMAGES_DIR_PATH)),
                         #    filepath=os.path.join("/utils/codeImages", filename)
