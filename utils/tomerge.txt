@@ -1,2 +1,3 @@
-1,0,#include <stdbool.h>[newline]
-2,-1,[comment]comments yippee[newline]
+1,-1,[comment] this is a for loop[newline]
+2,-1,[comment] printing i[newline]
+1,0,[comment] C:\Users\zroy1\SE101\se101-team-21\utils\codeImages\pic_0.png[newline]
