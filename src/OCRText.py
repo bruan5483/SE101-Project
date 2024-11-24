@@ -1,5 +1,11 @@
 from google.cloud import vision
 
+from logger_config import log_function_calls
+from logger_config import setup_logger
+
+setup_logger()
+
+@log_function_calls()
 def getText(path, output_file):
     
     client = vision.ImageAnnotatorClient()
