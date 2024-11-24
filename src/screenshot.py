@@ -12,6 +12,11 @@ from screeninfo import get_monitors, Monitor
 import keyboard
 import time
 
+from logger_config import log_function_calls
+from logger_config import setup_logger
+
+setup_logger()
+
 """
 Dependencies:
 - pip install pillow
@@ -31,6 +36,7 @@ monitor = Monitor(
         height=HEIGHT
     )
 
+@log_function_calls()
 def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
     # get size of screen
 
