@@ -3,14 +3,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DISPLAY = os.getenv('DISPLAY')
-os.environ['DISPLAY'] = DISPLAY
-
 from PIL import ImageGrab
 import pyautogui
 from screeninfo import get_monitors, Monitor
 import keyboard
 import time
+import buffer
 
 """
 Dependencies:
@@ -33,22 +31,26 @@ monitor = Monitor(
 
 static_dir_path = os.getenv("STATIC_DIR_PATH")
 
-def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
+def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_ELAPSED_TIME=300):
     
+    buffer.appendRequest("open-vscode")
+    # wait until we reach buffer
+    while (not buffer.isNext("open-vscode")):
+        print(buffer.buffer)
+        time.sleep(0.1)
+
+    os.environ["DISPLAY"] = ":1"
     
-    # get size of screen
 
-    # def scroll(height):
-    #     pyautogui.scroll(height)
-
-    # os.environ["DISPLAY"] = DISPLAY
     # * Enable on prod
     # os.system("sudo pkill code")
     os.system(f"code {code_file_path}")
 
-    kb = keyboard.Keyboard()
+    kb = keyboard.pynputKeyboard()
     time.sleep(10)
     kb.left_click()
+
+    buffer.completeEvent()
 
     def image_to_bytes(image):
         return list(image.getdata())
@@ -59,7 +61,19 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
 
     # while time.time() - start_time < MAX_ELAPSED_TIME:
     while True:
+        buffer.appendRequest("screenshot")
+        # wait until we reach buffer
+        while (not buffer.isNext("screenshot")):
+            print(buffer.buffer)
+            time.sleep(0.1)
+
+        os.environ["DISPLAY"] = ":1"
+        
+        kb = keyboard.pynputKeyboard()
+
+        #debug
         print(count)
+        
         if (kb.terminate):
             break
 
@@ -84,6 +98,9 @@ def getScreenshots(code_file_path, images_dir_path, MAX_ELAPSED_TIME=300):
         # time.sleep(2)
         # pyautogui.scroll(5)
         count += 1
+
+        buffer.completeEvent()
+
     print("done")
 
 

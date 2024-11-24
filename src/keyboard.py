@@ -2,8 +2,12 @@ import pynput
 # from pynput.keyboard import Key, Listener, Controller
 from threading import Thread
 import time
+from Xlib import X, XK, display
+from Xlib.ext import record
+from Xlib.protocol import rq
 
-class Keyboard:
+
+class pynputKeyboard:
 
     def __init__(self):
         self.terminate = False
@@ -37,9 +41,12 @@ class Keyboard:
 
     def pressKey_f11(self):
         self.keyboard.tap(pynput.keyboard.Key.f11)
+        # self.send_key(display, "F11")
+
 
     def pressKey_esc(self):
         self.keyboard.tap(pynput.keyboard.Key.esc)
+        # self.send_key(display, "Escape")
 
     def scroll(self, x, y):
         self.mouse.scroll(x, y)
@@ -47,3 +54,12 @@ class Keyboard:
     def left_click(self):
         self.mouse.click(pynput.mouse.Button.left)
 
+import pyautogui
+import os
+class dyanmicKeyboard():
+    def pressKey_f11(self):
+        pyautogui.press("f11")
+
+
+    def pressKey_esc(self):
+        pyautogui.press("esc")
