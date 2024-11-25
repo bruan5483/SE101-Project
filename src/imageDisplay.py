@@ -44,7 +44,9 @@ def open_image(image_path, buffer: buffer.Buffer):
         thread.start()
 
         # subprocess.Popen(["display", "-geometry", "1000x1000+0+0", image_path]) 
-        time.sleep(0.5)
+        start_time = time.time()
+        while time.time()-start_time < 2:
+            time.sleep(0.3)
 
         kb = keyboard.dyanmicKeyboard()
         # kb.pressKey_f11()
