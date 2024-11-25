@@ -6,7 +6,7 @@ def setup_logger():
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(message)s',
-        handlers=[logging.FileHandler("logs/function_calls.log"), logging.StreamHandler()]
+        handlers=[logging.FileHandler("../logs/function_calls.log")]
     )
 
 
