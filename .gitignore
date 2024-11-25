@@ -4,3 +4,4 @@ utils/codeImages/*
 utils/files/*
 src/static/codeImages*
 src/__pycache__
+logs/*
