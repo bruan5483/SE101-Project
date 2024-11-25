@@ -75,7 +75,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
         kb = keyboard.pynputKeyboard()
 
         #debug
-        print(count)
+        # print(count)
         
         if (kb.terminate):
             break
@@ -105,7 +105,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
 
         buffer.completeEvent()
 
-    print("done")
+    # print("done")
 
 
 # below is an example call of the function

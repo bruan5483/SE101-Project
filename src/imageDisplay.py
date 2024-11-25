@@ -29,7 +29,7 @@ def display_fullscreen_image(image_path):
     
     # cv2.waitKey(10000)  # Wait for a key press
     cv2.waitKey()  # Wait for a key press
-    cv2.destroyAllWindows()
+    cv2.destroyAllWindows()  # Close the window
 
 
 def open_image(image_path, buffer: buffer.Buffer):

@@ -13,6 +13,8 @@ import screenshot
 import imageProcessing
 import buffer
 import keyboard
+import camera
+import mergeFile
 
 
 # Variables
@@ -21,9 +23,11 @@ load_dotenv()
 buffer = buffer.Buffer()
 MAX_ELAPSED_TIME = 1
 RELATIVE_CODE_IMAGES_DIR_PATH = os.getenv("IMAGES_DIR_RELATIVE_PATH")
-CODE_IMAGES_DIR_PATH = os.getenv("IMAGES_DIR_PATH")
+CODE_IMAGES_DIR_PATH = os.getenv("CODE_IMAGES_DIR_PATH")
+ANNOTATIONS_IMAGES_DIR_PATH = os.getenv("ANNOTATIONS_IMAGES_DIR_PATH")
 FILE_UPLOAD_DIR = os.getenv("FILE_UPLOAD_DIR_PATH")
 STATIC_DIR_PATH = os.getenv("STATIC_DIR_PATH")
+MERGE_FILE_PATH = os.getenv("MERGE_FILE_PATH")
 
 # end Variables
 
@@ -60,9 +64,34 @@ def success():
         
         return render_template("fileUploadSuccess.html", filename=f.filename)
 
+@app.route("/capturePicture/<filename>/<imageIndex>", methods=["POST"])
+def capturePicture(filename, imageIndex):
+    annotation_image_path = os.path.join(ANNOTATIONS_IMAGES_DIR_PATH, f"annotation_{filename}_{imageIndex}")
+
+    # create thread to take a picture with the webcam
+    global annotation_image_thread
+    annotation_image_path = Thread(target=camera.cap/ture_picture, args=[annotation_image_path])
+    annotation_image_path.start()
+    
+    return jsonify({
+        "status": "success",
+        "filename": filename,
+        "imageIndex": imageIndex
+    })
+
+@app.route("/mergeAnnotations/<filename>", methods=["POST"])
+def mergeAnnotations(camera_dir, codefile_path):
+    mergeFile.main(camera_dir, codefile_path)
+    global mergefile_thread
+    mergeFile_thread = Thread(target = mergeFile.main, args=[camera_dir, codefile_path])
+    mergeFile_thread.start()
+
+    
+
 
 @app.route("/code/<filename>/<imageIndex>")
 def code(filename, imageIndex):
+
     
     imageIndex = int(imageIndex)
     imageIndex = imageProcessing.validateImageIndex(CODE_IMAGES_DIR_PATH, imageIndex)
