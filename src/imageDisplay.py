@@ -10,24 +10,26 @@ width = 1920
 height = 1080
 
 def display_fullscreen_image(image_path):
-
-    # Read the image
-    image = cv2.imread(image_path)
+    # Load the image
+    img = cv2.imread(image_path, 1)
     
-    # Check if the image was loaded successfully
-    if image is None:
+    if img is None:
         print(f"Error: Unable to load image from {image_path}")
         return
-
-    # Create a named window and set it to fullscreen
-    cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
-    cv2.setWindowProperty('Image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-
-    # Display the image
-    cv2.imshow('Image', image)
+    
+    # Resize the image to fit the screen
+    resized_img = cv2.resize(img, (width, height), interpolation=cv2.INTER_AREA)
+    
+    # Create a named window and set it to full screen
+    cv2.namedWindow("FullScreen_Window", cv2.WINDOW_NORMAL)
+    cv2.setWindowProperty("FullScreen_Window", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    
+    # Display the resized image
+    cv2.imshow("FullScreen_Window", resized_img)
+    
     # cv2.waitKey(10000)  # Wait for a key press
     cv2.waitKey()  # Wait for a key press
-    cv2.destroyAllWindows()  # Close the window
+    cv2.destroyAllWindows()
 
 
 def open_image(image_path, buffer: buffer.Buffer):
