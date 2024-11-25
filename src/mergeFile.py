@@ -1,32 +1,36 @@
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 import os
+import OCRText
+import generateMergeFile
+import imageProcessing
 
 # load dotenv
 load_dotenv()
 
 MERGE_FILE_PATH = os.getenv("MERGE_FILE_PATH")
 
+
 def parse_mergefile(toedit, mergefile):
     readingcode = open(toedit,"r")
     cached_codefile=readingcode.readlines()
     readingcode.close()
 
-    print (cached_codefile)
+    # print (cached_codefile)
 
     updated_codefile=cached_codefile
 
     with open(mergefile) as tomerge:
         for line in tomerge:
-            print(line)
-            parsedline=parse_line(line.rstrip())
-            print(parsedline)
+            # print(line)
+            parsedline=parse_line(line.rstrip(), toedit)
+            # print(parsedline)
             updated_codefile=update_contents(parsedline,updated_codefile)
     
-    print (updated_codefile)
+    # print (updated_codefile)
     update_codefile(updated_codefile,toedit)
 
-def parse_line(l)->(int, int, str):
-    print(l)
+def parse_line(l, toedit)->(int, int, str):
+    # print(l)
     splitstring=l.split(',')
     #add error detection
     linenum=int(splitstring[0]) - 1 # start from 1 index for line num
@@ -69,7 +73,7 @@ def update_contents(tochange:tuple[int,int,str],contents):
         contents[tochange[0]]+=tochange[2]
 
     elif (tochange[1]==0):
-        contents.insert(tochange[0]-1,tochange[2])
+        contents.insert(tochange[0],tochange[2])
     
     #else:
         #handle inserting to the middle of a line
@@ -83,3 +87,15 @@ def update_codefile(contents,writepath):
 
 # file_to_edit="./codestuff.c"
 # parse_mergefile(file_to_edit, MERGE_FILE_PATH)
+
+
+def main(camera_dir, codefile_path):
+    imageProcessing.parseAll(camera_dir)
+    OCRText.getText("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\text", 
+                    "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\ocr.txt")
+    generateMergeFile.generateToMerge("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\ocr.txt", 
+                                      "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\images",
+                                      "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt")
+    parse_mergefile("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt", codefile_path)
+
+# parse_mergefile("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\royIQ.py", "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt")

@@ -11,9 +11,15 @@
         <h1 id="no-image-message">Your images will be ready soon</h1>
         
         <br/>
-
         <button id="prev-image-button", onclick="changeIndex(-1)">Prev Image</button>
         <button id="next-image-button", onclick="changeIndex(1)">Next Image</button>
+        
+        <br/>
+        <button id="save-progress", onclick="{capturePicture()}">Save Progress</button>
+        
+        <br/>
+        <button id="merge-annotations", onclick="{mergeAnnotations()}">Merge Annotations</button>
+        
     </body>
 
     <script>
@@ -24,6 +30,8 @@
         
         if (maxIndex === 0) {
             document.getElementById("code-image").style.display = "none"
+            document.getElementById("save-progress").style.display = "none"
+            document.getElementById("merge-annotations").style.display = "none"
         }
         else {
             document.getElementById("no-image-message").style.display = "none"
@@ -48,6 +56,19 @@
             // window.location.href("/code/{{ filename }}/{{ newIndex }}")
         }
 
+        function capturePicture() {
+            fetch(`/capturePicture/{{ filename }}/${imageIndex}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        }
+        
+        function mergeAnnotations() {
+            fetch(`/mergeAnnotations/{{ filename }}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(error => console.error('Error:', error));
+        }
 
         </script>
 </html>
