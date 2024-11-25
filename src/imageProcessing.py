@@ -93,4 +93,4 @@ def validateImageIndex(images_dir, index) -> int:
 
     return  max(0, min(n-1, index))
 
-parseAll("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\annotations")
+# parseAll("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\annotations")
