@@ -9,7 +9,7 @@ def parseOCR(ocr_file, tomerge_path):
     with open(ocr_file, 'r+') as file:
         lines = file.readlines()
         for line in lines:
-            print(line.strip())
+            # print(line.strip())
             # line number 
             number = re.match(r'^[^\w]*\s*(\d+)\)*', line.strip())
             if number:
