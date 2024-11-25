@@ -1,6 +1,7 @@
 import os
 os.system("export DISPLAY=:1")
 
+import cv2
 from flask import *
 from fileinput import filename
 from dotenv import load_dotenv
@@ -96,6 +97,9 @@ if (__name__ == "__main__"):
     # open_initial_image()
     
     port = 8000
+
+    # Create a named window and set it to fullscreen
+    
 
     imageDisplay.open_image(os.path.join(STATIC_DIR_PATH, "initial-image.png"), buffer)
     # app.run(host="0.0.0.0", port=port)

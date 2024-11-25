@@ -11,7 +11,7 @@ while true; do
 		tigervncserver
 		export DISPLAY=:1
 		xhost +
-		python3 /home/ronak/Desktop/project-code/src/app.py
+		# python3 /home/ronak/Desktop/project-code/src/app.py
 		break
 	else
 		echo "Not connected to Wi-Fi. Retrying in 5 seconds..."

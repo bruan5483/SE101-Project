@@ -19,15 +19,15 @@ def display_fullscreen_image(image_path):
         print(f"Error: Unable to load image from {image_path}")
         return
 
-    # Create a named window and set it to fullscreen
     cv2.namedWindow('Image', cv2.WINDOW_NORMAL)
     cv2.setWindowProperty('Image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     # Display the image
     cv2.imshow('Image', image)
     # cv2.waitKey(10000)  # Wait for a key press
+    # cv2.waitKey(5000)  # Wait for a key press
     cv2.waitKey()  # Wait for a key press
-    cv2.destroyAllWindows()  # Close the window
+    cv2.destroyAllWindows()
 
 
 def open_image(image_path, buffer: buffer.Buffer):
@@ -42,6 +42,10 @@ def open_image(image_path, buffer: buffer.Buffer):
         global thread
         thread = Thread(target=display_fullscreen_image, args=[image_path])
         thread.start()
+
+        print(image_path)
+
+        # display_fullscreen_image(image_path)
 
         # subprocess.Popen(["display", "-geometry", "1000x1000+0+0", image_path]) 
         time.sleep(0.5)
