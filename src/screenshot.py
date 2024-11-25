@@ -10,10 +10,10 @@ import keyboard
 import time
 import buffer
 
-from logger_config import log_function_calls
-from logger_config import setup_logger
+# from logger_config import log_function_calls
+# from logger_config import setup_logger
 
-setup_logger()
+# setup_logger()
 
 """
 Dependencies:
