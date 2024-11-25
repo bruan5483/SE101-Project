@@ -14,6 +14,7 @@ import imageProcessing
 import buffer
 import keyboard
 import camera
+import mergeFile
 
 
 # Variables
@@ -69,7 +70,7 @@ def capturePicture(filename, imageIndex):
 
     # create thread to take a picture with the webcam
     global annotation_image_thread
-    annotation_image_path = Thread(target=camera.capture_picture, args=[annotation_image_path])
+    annotation_image_path = Thread(target=camera.cap/ture_picture, args=[annotation_image_path])
     annotation_image_path.start()
     
     return jsonify({
@@ -79,9 +80,11 @@ def capturePicture(filename, imageIndex):
     })
 
 @app.route("/mergeAnnotations/<filename>", methods=["POST"])
-def mergeAnnotations(filename):
-    # do it lololmao
-    pass
+def mergeAnnotations(camera_dir, codefile_path):
+    mergeFile.main(camera_dir, codefile_path)
+    global mergefile_thread
+    mergeFile_thread = Thread(target = mergeFile.main, args=[camera_dir, codefile_path])
+    mergeFile_thread.start()
 
     
 
