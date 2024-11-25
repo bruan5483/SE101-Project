@@ -1,5 +1,7 @@
 venv
 utils/google_ocr_service_token.json
-utils/codeImages
+utils/codeImages/*
 utils/files/*
 src/static/codeImages*
+src/__pycache__
+logs/*

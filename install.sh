@@ -8,3 +8,4 @@ pip install flask
 pip install python-dotenv
 pip install screeninfo
 pip install keyboard
+pip install opencv-python

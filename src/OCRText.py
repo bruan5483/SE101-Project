@@ -12,12 +12,12 @@ def getText(path, output_file):
 
     with open(path, "rb") as image_file:
         content = image_file.read()
-
+ 
     image = vision.Image(content=content)
 
     response = client.document_text_detection(image=image)
 
-    with open(output_file, "w") as f:  # Open the output file to write detected text
+    with open(output_file, "a") as f:  # Open the output file to write detected text
         for page in response.full_text_annotation.pages:
             for block in page.blocks:
                 for paragraph in block.paragraphs:
