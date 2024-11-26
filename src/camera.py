@@ -15,7 +15,7 @@ def capture_picture(image_path):
 
     if res:
         
-        cv2.imwrite(image_path, res)
+        cv2.imwrite(image_path, img)
 
 
 # take_picture("utils/annotationImages/img.png")
