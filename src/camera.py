@@ -20,10 +20,9 @@ def init_cam():
             cam_port+=1
             time.sleep(1)
 
-cam = init_cam() 
 
 def capture_picture(image_paths):
-
+    cam = init_cam()
     if not (cam.isOpened()):
         print("Not open")
 
