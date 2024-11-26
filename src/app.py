@@ -74,7 +74,7 @@ def capturePicture(filename, imageIndex):
     global annotation_image_thread
     annotation_image_path = Thread(target=camera.capture_picture, args=[annotation_image_path])
     annotation_image_path.start()
-    camera.capture_picture(annotation_image_path)
+    #camera.capture_picture(annotation_image_path)
     
     return jsonify({
         "status": "success",
