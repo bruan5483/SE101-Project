@@ -22,7 +22,7 @@ def init_cam():
 
 cam = init_cam() 
 
-def capture_picture(image_path):
+def capture_picture(image_paths):
 
     if not (cam.isOpened()):
         print("Not open")
@@ -30,9 +30,10 @@ def capture_picture(image_path):
     res, img = cam.read()
 
     if res:
-        cv2.imwrite(image_path, img)
+        for image_path in image_paths:
+            cv2.imwrite(image_path, img)
 
-        print(image_path)
-        print("done saving picture")
+        # print(image_path)
+        # print("done saving picture")
 
 # capture_picture("./img.png")

@@ -1,0 +1,2 @@
+1,0,[comment] /home/ronak/Desktop/project-code/utils/images/img_0.png[newline]
+37,0,[comment] /home/ronak/Desktop/project-code/utils/images/img_1.png[newline]
