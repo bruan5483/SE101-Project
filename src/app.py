@@ -66,12 +66,14 @@ def success():
 
 @app.route("/capturePicture/<filename>/<imageIndex>", methods=["POST"])
 def capturePicture(filename, imageIndex):
-    annotation_image_path = os.path.join(ANNOTATIONS_IMAGES_DIR_PATH, f"annotation_{filename}_{imageIndex}")
+    annotation_image_path = os.path.join(ANNOTATIONS_IMAGES_DIR_PATH, f"annotation_{imageIndex}.png")
+    print(annotation_image_path)
 
     # create thread to take a picture with the webcam
     global annotation_image_thread
     annotation_image_path = Thread(target=camera.capture_picture, args=[annotation_image_path])
     annotation_image_path.start()
+    camera.capture_picture(annotation_image_path)
     
     return jsonify({
         "status": "success",
@@ -87,8 +89,6 @@ def mergeAnnotations(camera_dir, codefile_path):
     mergeFile_thread.start()
 
     
-
-
 @app.route("/code/<filename>/<imageIndex>")
 def code(filename, imageIndex):
 
@@ -96,6 +96,12 @@ def code(filename, imageIndex):
     imageIndex = int(imageIndex)
     imageIndex = imageProcessing.validateImageIndex(CODE_IMAGES_DIR_PATH, imageIndex)
     image_path = os.path.join(STATIC_DIR_PATH, f"codeImages_pic_{imageIndex}.png")
+    
+    annotation_image_path = os.path.join(STATIC_DIR_PATH, "camera_display.png")
+    global annotation_image_thread_display
+    annotation_image_thread_display = Thread(target=camera.capture_picture, args=[annotation_image_path])
+    annotation_image_thread_display.start()
+
     
     def open_image():
         # os.system("sudo pkill display")
