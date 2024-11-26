@@ -11,14 +11,14 @@ load_dotenv()
 
 def init_cam():
     cam_port = -1
-    while True:
+    while cam_port <= 10:
         cam = cv2.VideoCapture(cam_port)
         if cam.isOpened():
             return cam
         else:
             cam.release()
             cam_port+=1
-            time.sleep(0.3)
+            time.sleep(1)
 
 cam = init_cam() 
 
@@ -36,4 +36,4 @@ def capture_picture(image_paths):
         # print(image_path)
         # print("done saving picture")
 
-# capture_picture("./img.png")
+#capture_picture(["./img.png", "./dsa.png"])
