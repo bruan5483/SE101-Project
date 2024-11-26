@@ -54,7 +54,7 @@ def open_image(image_path, buffer: buffer.Buffer):
         # kb.pressKey_f11()
         # kb.pressKey_esc()
         
-        os.environ["DISPLAY"] = ":1"
+        os.environ["DISPLAY"] = ":2"
         
         buffer.completeEvent()
 

@@ -43,7 +43,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
     while (not buffer.isNext("open-vscode")):
         time.sleep(0.1)
 
-    os.environ["DISPLAY"] = ":1"
+    os.environ["DISPLAY"] = ":2"
     
 
     # * Enable on prod
@@ -70,7 +70,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
         while (not buffer.isNext("screenshot")):
             time.sleep(0.3)
 
-        os.environ["DISPLAY"] = ":1"
+        os.environ["DISPLAY"] = ":2"
         
         kb = keyboard.pynputKeyboard()
 
