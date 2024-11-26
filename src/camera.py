@@ -11,7 +11,7 @@ load_dotenv()
 
 def init_cam():
     cam_port = -1
-    while True:
+    while cam_port <= 10:
         cam = cv2.VideoCapture(cam_port)
         if cam.isOpened():
             return cam
