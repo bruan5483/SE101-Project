@@ -103,7 +103,6 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
         # pyautogui.scroll(5)
         count += 1
 
-        os.environ["DISPLAY"] = ":1"
         buffer.completeEvent()
 
     # print("done")
@@ -111,4 +110,3 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
 
 # below is an example call of the function
 # getScreenshots("/home/ronak/Desktop/project-code/utils/files/app.py", "/home/ronak/Desktop/project-code/utils/codeImages/")
-# getScreenshots("C:\\Users\\haris\\OneDrive\\Desktop\\SE101\\se101-lab-3\\triangle.c", "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\screenshots", buffer.Buffer())
