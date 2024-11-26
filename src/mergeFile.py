@@ -8,6 +8,9 @@ import imageProcessing
 load_dotenv()
 
 MERGE_FILE_PATH = os.getenv("MERGE_FILE_PATH")
+FILTERED_IMAGES_DIR_PATH = os.getenv("FILTERED_IMAGES_DIR_PATH")
+OCR_OUTPUT_FILE_PATH = os.getenv("OCR_OUTPUT_FILE_PATH")
+DRAWING_ANNOTATIONS_IMAGES_DIR_PATH = os.getenv("DRAWING_ANNOTATIONS_IMAGES_DIR_PATH")
 
 
 def parse_mergefile(toedit, mergefile):
@@ -91,20 +94,19 @@ def update_codefile(contents,writepath):
 
 def main(camera_dir, codefile_path):
     imageProcessing.parseAll(camera_dir)
-    for filename in os.listdir("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\text"):
+    for filename in os.listdir(FILTERED_IMAGES_DIR_PATH):
         try:
-            file_path = os.path.join("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\text", filename)
-            OCRText.getText(file_path, 
-                    "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\ocr.txt")
+            file_path = os.path.join(FILTERED_IMAGES_DIR_PATH, filename)
+            OCRText.getText(file_path, OCR_OUTPUT_FILE_PATH)
         except Exception as e:
             print(e)
             continue
     
-    generateMergeFile.generateToMerge("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\ocr.txt", 
-                                      "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\images",
-                                      "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\tomerge.txt")
+    generateMergeFile.generateToMerge(OCR_OUTPUT_FILE_PATH, 
+                                      DRAWING_ANNOTATIONS_IMAGES_DIR_PATH,
+                                      MERGE_FILE_PATH)
     
-    parse_mergefile(codefile_path, "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\tomerge.txt")
+    parse_mergefile(codefile_path, MERGE_FILE_PATH)
 
 
 # main("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\annotations", "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\royIQ.py")

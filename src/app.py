@@ -46,6 +46,7 @@ def success():
     if request.method == "POST":
         # remove all images in images dir
         imageProcessing.pruneDir(CODE_IMAGES_DIR_PATH)
+        imageProcessing.pruneDir(ANNOTATIONS_IMAGES_DIR_PATH)
         
         f = request.files["file"]
         f.save(os.path.join(FILE_UPLOAD_DIR, f.filename))
@@ -66,7 +67,7 @@ def success():
 
 @app.route("/capturePicture/<filename>/<imageIndex>", methods=["POST"])
 def capturePicture(filename, imageIndex):
-    annotation_image_path = os.path.join(ANNOTATIONS_IMAGES_DIR_PATH, f"annotation_{imageIndex}.png")
+    annotation_image_path = os.path.join(ANNOTATIONS_IMAGES_DIR_PATH, f"img_{imageIndex}.png")
     print(annotation_image_path)
 
     # create thread to take a picture with the webcam
@@ -82,12 +83,20 @@ def capturePicture(filename, imageIndex):
     })
 
 @app.route("/mergeAnnotations/<filename>", methods=["POST"])
-def mergeAnnotations(camera_dir, codefile_path):
-    mergeFile.main(camera_dir, codefile_path)
+def mergeAnnotations(filename):
+    codefile_path = os.path.join(FILE_UPLOAD_DIR, filename)
+    mergeFile.main(ANNOTATIONS_IMAGES_DIR_PATH, codefile_path)
     global mergefile_thread
-    mergeFile_thread = Thread(target = mergeFile.main, args=[camera_dir, codefile_path])
+    mergeFile_thread = Thread(target = mergeFile.main, args=[ANNOTATIONS_IMAGES_DIR_PATH, codefile_path])
     mergeFile_thread.start()
 
+@app.route('/download/<filename>')
+def download_file(filename):
+    file_path = os.path.join(FILE_UPLOAD_DIR, filename)
+    try:
+        return send_file(file_path, as_attachment=True)
+    except Exception as e:
+        return str(e)
     
 @app.route("/code/<filename>/<imageIndex>")
 def code(filename, imageIndex):
