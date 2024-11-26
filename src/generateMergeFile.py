@@ -11,7 +11,7 @@ def parseOCR(ocr_file, tomerge_path):
         for line in lines:
             # print(line.strip())
             # line number 
-            number = re.match(r'^[^\w]*\s*(\d+)\)*', line.strip())
+            number = re.match(r'^[^\w]*\s*(\d*)\)*', line.strip())
             if number:
                 number = number.group(1)
             else:
