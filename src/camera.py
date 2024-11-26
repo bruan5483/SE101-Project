@@ -18,7 +18,7 @@ def init_cam():
         else:
             cam.release()
             cam_port+=1
-            time.sleep(0.3)
+            time.sleep(1)
 
 cam = init_cam() 
 
