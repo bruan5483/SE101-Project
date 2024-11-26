@@ -131,9 +131,9 @@ def code(filename, imageIndex):
     
     # annotation_image_path = os.path.join(STATIC_DIR_PATH, "camera_display.png")
     
-    global annotation_image_thread_display
-    annotation_image_thread_display = Thread(target=camera.capture_picture, args=[annotation_image_path])
-    annotation_image_thread_display.start()
+    #global annotation_image_thread_display
+    #annotation_image_thread_display = Thread(target=camera.capture_picture, args=[annotation_image_path])
+    #annotation_image_thread_display.start()
 
     
     def open_image():
