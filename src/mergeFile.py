@@ -91,11 +91,21 @@ def update_codefile(contents,writepath):
 
 def main(camera_dir, codefile_path):
     imageProcessing.parseAll(camera_dir)
-    OCRText.getText("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\text", 
-                    "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\ocr.txt")
-    generateMergeFile.generateToMerge("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\ocr.txt", 
-                                      "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\images",
-                                      "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt")
-    parse_mergefile("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt", codefile_path)
+    for filename in os.listdir("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\text"):
+        try:
+            file_path = os.path.join("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\text", filename)
+            OCRText.getText(file_path, 
+                    "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\ocr.txt")
+        except Exception as e:
+            print(e)
+            continue
+    
+    generateMergeFile.generateToMerge("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\ocr.txt", 
+                                      "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\images",
+                                      "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\tomerge.txt")
+    
+    parse_mergefile(codefile_path, "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\tomerge.txt")
 
+
+main("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\annotations", "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\royIQ.py")
 # parse_mergefile("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\royIQ.py", "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt")
