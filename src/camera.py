@@ -36,4 +36,4 @@ def capture_picture(image_paths):
         # print(image_path)
         # print("done saving picture")
 
-# capture_picture("./img.png")
+#capture_picture(["./img.png", "./dsa.png"])
