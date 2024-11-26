@@ -24,10 +24,13 @@ def parse_mergefile(toedit, mergefile):
 
     with open(mergefile) as tomerge:
         for line in tomerge:
-            # print(line)
-            parsedline=parse_line(line.rstrip(), toedit)
-            # print(parsedline)
-            updated_codefile=update_contents(parsedline,updated_codefile)
+            try:
+                # print(line)
+                parsedline=parse_line(line.rstrip(), toedit)
+                # print(parsedline)
+                updated_codefile=update_contents(parsedline,updated_codefile)
+            except Exception as e:
+                continue
     
     # print (updated_codefile)
     update_codefile(updated_codefile,toedit)
@@ -99,15 +102,18 @@ def main(camera_dir, codefile_path):
             file_path = os.path.join(FILTERED_IMAGES_DIR_PATH, filename)
             OCRText.getText(file_path, OCR_OUTPUT_FILE_PATH)
         except Exception as e:
-            print(e)
+            # print(e)
             continue
-    
-    generateMergeFile.generateToMerge(OCR_OUTPUT_FILE_PATH, 
+    try:
+        generateMergeFile.generateToMerge(OCR_OUTPUT_FILE_PATH, 
                                       DRAWING_ANNOTATIONS_IMAGES_DIR_PATH,
                                       MERGE_FILE_PATH)
-    
-    parse_mergefile(codefile_path, MERGE_FILE_PATH)
+        
+        parse_mergefile(codefile_path, MERGE_FILE_PATH)
+    except Exception as e:
+        pass
 
 
 # main("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\annotations", "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\royIQ.py")
 # parse_mergefile("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\royIQ.py", "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt")
+# parse_mergefile("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\royIQ.py", "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\tomerge.txt")

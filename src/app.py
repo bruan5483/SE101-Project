@@ -128,8 +128,6 @@ def code(filename, imageIndex):
                         #    filepath=os.path.join("/utils/codeImages", filename)
                         )
 
-
-
 if (__name__ == "__main__"):
     
     #* enable on prod

@@ -1,4 +1,7 @@
 from google.cloud import vision
+import os 
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\google_ocr_service_token.json"
+
 
 # from logger_config import log_function_calls
 # from logger_config import setup_logger
@@ -17,7 +20,7 @@ def getText(path, output_file):
 
     response = client.document_text_detection(image=image)
 
-    with open(output_file, "a") as f:  # Open the output file to write detected text
+    with open(output_file, "a", encoding='utf-8') as f:  # Open the output file to write detected text
         for page in response.full_text_annotation.pages:
             for block in page.blocks:
                 for paragraph in block.paragraphs:
@@ -33,3 +36,4 @@ def getText(path, output_file):
             "https://cloud.google.com/apis/design/errors".format(response.error.message)
         )
 
+# getText("utils\\text\\img_0.png", "utils\\ocr.txt")

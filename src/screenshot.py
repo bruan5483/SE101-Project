@@ -51,7 +51,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
     os.system(f"code {code_file_path}")
 
     kb = keyboard.pynputKeyboard()
-    time.sleep(10)
+    # time.sleep(10)
     kb.left_click()
 
     buffer.completeEvent()
@@ -91,11 +91,11 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
         img_path = os.path.join(images_dir_path, f"pic_{count}.png")
         static_img_path = os.path.join(static_dir_path, f"codeImages_pic_{count}.png")
         
-        time.sleep(5.3)
+        # time.sleep(5.3)
         # if not first:
         screenshot.save(img_path)
         screenshot.save(static_img_path)
-        time.sleep(5.3)
+        # time.sleep(5.3)
         # else:
         #     first = False
         kb.scroll(0, -13)
@@ -111,3 +111,4 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
 
 # below is an example call of the function
 # getScreenshots("/home/ronak/Desktop/project-code/utils/files/app.py", "/home/ronak/Desktop/project-code/utils/codeImages/")
+# getScreenshots("C:\\Users\\haris\\OneDrive\\Desktop\\SE101\\se101-lab-3\\triangle.c", "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\screenshots", buffer.Buffer())

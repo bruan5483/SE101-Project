@@ -1,11 +1,11 @@
 import os
 from dotenv import load_dotenv
 import cv2
-# from cv2 import
+import time
 
 load_dotenv()
 
-CAMERA_PORT = int(os.getenv("CAMERA_PORT"))
+# CAMERA_PORT = int(os.getenv("CAMERA_PORT"))
 
 cam = cv2.VideoCapture(0)
 
