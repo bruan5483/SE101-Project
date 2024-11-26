@@ -9,8 +9,10 @@
       <p>You will be redirected shortly.</p>
 
       <script type="text/javascript">
+         alert("test");
          setTimeout(function() {
-            window.location.href="/code/{{ filename }}/0"
+            window.location.href = "/code/{{ filename }}/0";
+            
          })
       </script>
    </body> 
