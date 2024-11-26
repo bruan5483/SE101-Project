@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 from threading import Thread
 import time
 import imageDisplay
+import shutil 
+
 
 # import custom modules
 import screenshot
@@ -28,6 +30,8 @@ ANNOTATIONS_IMAGES_DIR_PATH = os.getenv("ANNOTATIONS_IMAGES_DIR_PATH")
 FILE_UPLOAD_DIR = os.getenv("FILE_UPLOAD_DIR_PATH")
 STATIC_DIR_PATH = os.getenv("STATIC_DIR_PATH")
 MERGE_FILE_PATH = os.getenv("MERGE_FILE_PATH")
+DRAWING_ANNOTATIONS_IMAGES_DIR_PATH=os.getenv("DRAWING_ANNOTATIONS_IMAGES_DIR_PATH")
+
 
 # end Variables
 
@@ -69,9 +73,10 @@ def success():
 def capturePicture(filename, imageIndex):
     annotation_image_path = os.path.join(ANNOTATIONS_IMAGES_DIR_PATH, f"img_{imageIndex}.png")
     # print(annotation_image_path)
-    annotation_static_image_path = os.path.join(STATIC_DIR_PATH, "camera_display.png")
+    annotation_static_image_path = os.path.join(STATIC_DIR_PATH, f"img_{imageIndex}.png")
+    camera_display_image_path = os.path.join(STATIC_DIR_PATH, "camera_display.png")
 
-    paths = [annotation_image_path, annotation_static_image_path]
+    paths = [annotation_image_path, annotation_static_image_path, camera_display_image_path]
 
     # create thread to take a picture with the webcam
     global annotation_image_thread
@@ -101,6 +106,16 @@ def mergeAnnotations(filename):
 @app.route('/download/<filename>')
 def download_file(filename):
     file_path = os.path.join(FILE_UPLOAD_DIR, filename)
+    try:
+        return send_file(file_path, as_attachment=True)
+    except Exception as e:
+        return str(e)
+    
+@app.route('/download-images')
+def download_image():
+    file_path = os.path.join(FILE_UPLOAD_DIR, "zip-img.zip")
+    shutil.make_archive(file_path, 'zip', DRAWING_ANNOTATIONS_IMAGES_DIR_PATH)
+
     try:
         return send_file(file_path, as_attachment=True)
     except Exception as e:

@@ -36,8 +36,9 @@ def parseImage(directory, tomerge_path):
     # grab path of all images in directory
     for filename in os.listdir(directory):
         try:
-            file_path = os.path.join(directory, filename)
-            images.append(file_path)
+            # file_path = os.path.join(directory, filename)
+            # images.append(file_path)
+            images.append(filename)
         except Exception as e:
             continue
     images.sort()

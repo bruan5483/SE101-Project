@@ -26,6 +26,7 @@ def parseImage(image):
     baseDir = os.path.dirname(os.path.dirname(os.path.abspath(image)))
     folderRed = os.path.join(baseDir, "text")
     folderBlue = os.path.join(baseDir, "images")
+    folderFile = os.path.join(baseDir, "files")
 
     try:
         # print(f"\nimagE:{image}\n")
@@ -59,6 +60,7 @@ def parseImage(image):
         # print(os.path.join(folderRed, os.path.basename(image)))
         inputImageR.save(os.path.join(folderRed, os.path.basename(image)))
         inputImageB.save(os.path.join(folderBlue, os.path.basename(image)))
+        inputImageB.save(os.path.join(folderFile, os.path.basename(image)))
 
     except: return
 
