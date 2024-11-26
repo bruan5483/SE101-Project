@@ -1,6 +1,4 @@
 from google.cloud import vision
-import os 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\google_ocr_service_token.json"
 
 
 # from logger_config import log_function_calls
