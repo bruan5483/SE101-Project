@@ -107,5 +107,5 @@ def main(camera_dir, codefile_path):
     parse_mergefile(codefile_path, "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\tomerge.txt")
 
 
-main("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\annotations", "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\royIQ.py")
+# main("C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\annotations", "C:\\Users\\haris\\OneDrive\\Desktop\\SE101-2\\se101-team-21\\utils\\royIQ.py")
 # parse_mergefile("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\royIQ.py", "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\tomerge.txt")
