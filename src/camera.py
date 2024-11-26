@@ -7,7 +7,7 @@ load_dotenv()
 
 # CAMERA_PORT = int(os.getenv("CAMERA_PORT"))
 
-cam = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(1)
 
 def capture_picture(image_path):
 
@@ -21,3 +21,5 @@ def capture_picture(image_path):
 
         print(image_path)
         print("done saving picture")
+
+capture_picture("./img.png")

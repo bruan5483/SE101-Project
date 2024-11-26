@@ -90,6 +90,11 @@ def mergeAnnotations(filename):
     mergeFile_thread = Thread(target = mergeFile.main, args=[ANNOTATIONS_IMAGES_DIR_PATH, codefile_path])
     mergeFile_thread.start()
 
+    return jsonify({
+        "status": "success",
+        "filename": filename
+    })
+
 @app.route('/download/<filename>')
 def download_file(filename):
     file_path = os.path.join(FILE_UPLOAD_DIR, filename)
@@ -108,9 +113,9 @@ def code(filename, imageIndex):
     
     annotation_image_path = os.path.join(STATIC_DIR_PATH, "camera_display.png")
     
-    global annotation_image_thread_display
-    annotation_image_thread_display = Thread(target=camera.capture_picture, args=[annotation_image_path])
-    annotation_image_thread_display.start()
+    # global annotation_image_thread_display
+    # annotation_image_thread_display = Thread(target=camera.capture_picture, args=[annotation_image_path])
+    # annotation_image_thread_display.start()
 
     
     def open_image():

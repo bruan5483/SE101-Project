@@ -6,7 +6,7 @@ After=network.target
 ExecStart=/home/ronak/Desktop/project-code/shellScripts/wifi_check.sh
 WorkingDirectory=/home/ronak/Desktop/project-code
 User=ronak
-Environment="DISPLAY=:1"
+Environment="DISPLAY=:0"
 Restart=always
 
 [Install]
