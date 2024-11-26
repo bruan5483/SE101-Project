@@ -115,7 +115,7 @@ def download_file(filename):
 @app.route('/download-images')
 def download_image():
     file_path = os.path.join(FILE_UPLOAD_DIR, "zip-img")
-    shutil.make_archive(file_path, 'zip', DRAWING_ANNOTATIONS_IMAGES_DIR_PATH)
+    shutil.make_archive(file_path, 'zip', ANNOTATIONS_IMAGES_DIR_PATH)
 
     try:
         return send_file(file_path + ".zip", as_attachment=True)
