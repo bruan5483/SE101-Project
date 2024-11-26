@@ -9,7 +9,7 @@ while true; do
 		source /home/ronak/Desktop/project-code/venv/bin/activate
 		echo "Creating vnc server"
 		tigervncserver
-		export DISPLAY=:0
+		export DISPLAY=:1
 		xhost +
 		python3 /home/ronak/Desktop/project-code/src/app.py
 		break

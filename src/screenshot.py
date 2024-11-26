@@ -103,6 +103,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
         # pyautogui.scroll(5)
         count += 1
 
+        os.environ["DISPLAY"] = ":1"
         buffer.completeEvent()
 
     # print("done")

@@ -70,7 +70,7 @@ def capturePicture(filename, imageIndex):
 
     # create thread to take a picture with the webcam
     global annotation_image_thread
-    annotation_image_path = Thread(target=camera.cap/ture_picture, args=[annotation_image_path])
+    annotation_image_path = Thread(target=camera.capture_picture, args=[annotation_image_path])
     annotation_image_path.start()
     
     return jsonify({
