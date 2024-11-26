@@ -21,6 +21,3 @@ def capture_picture(image_path):
 
         print(image_path)
         print("done saving picture")
-
-
-capture_picture("utils/annotationImages/img.png")
