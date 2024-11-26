@@ -85,7 +85,7 @@ def capturePicture(filename, imageIndex):
 @app.route("/mergeAnnotations/<filename>", methods=["POST"])
 def mergeAnnotations(filename):
     codefile_path = os.path.join(FILE_UPLOAD_DIR, filename)
-    mergeFile.main(ANNOTATIONS_IMAGES_DIR_PATH, codefile_path)
+    #mergeFile.main(ANNOTATIONS_IMAGES_DIR_PATH, codefile_path)
     global mergefile_thread
     mergeFile_thread = Thread(target = mergeFile.main, args=[ANNOTATIONS_IMAGES_DIR_PATH, codefile_path])
     mergeFile_thread.start()
