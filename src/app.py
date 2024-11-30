@@ -81,8 +81,8 @@ def capturePicture(filename, imageIndex):
 
     # create thread to take a picture with the webcam
     global annotation_image_thread
-    annotation_image_path = Thread(target=camera.capture_picture, args=[paths])
-    annotation_image_path.start()
+    annotation_image_thread = Thread(target=camera.capture_picture, args=[paths])
+    annotation_image_thread.start()
     #camera.capture_picture(annotation_image_path)
     
     return jsonify({
@@ -95,9 +95,10 @@ def capturePicture(filename, imageIndex):
 def mergeAnnotations(filename):
     codefile_path = os.path.join(FILE_UPLOAD_DIR, filename)
     #mergeFile.main(ANNOTATIONS_IMAGES_DIR_PATH, codefile_path)
-    global mergefile_thread
-    mergeFile_thread = Thread(target = mergeFile.main, args=[ANNOTATIONS_IMAGES_DIR_PATH, codefile_path])
-    mergeFile_thread.start()
+
+    global merge_file_thread
+    merge_file_thread = Thread(target = mergeFile.main, args=[ANNOTATIONS_IMAGES_DIR_PATH, codefile_path])
+    merge_file_thread.start()
 
     return jsonify({
         "status": "success",
@@ -124,17 +125,17 @@ def download_image():
     
 @app.route("/code/<filename>/<imageIndex>")
 def code(filename, imageIndex):
-
     
     imageIndex = int(imageIndex)
     imageIndex = imageProcessing.validateImageIndex(CODE_IMAGES_DIR_PATH, imageIndex)
     image_path = os.path.join(STATIC_DIR_PATH, f"codeImages_pic_{imageIndex}.png")
     
-    # annotation_image_path = os.path.join(STATIC_DIR_PATH, "camera_display.png")
+    # camera_display_image_path = [os.path.join(STATIC_DIR_PATH, "camera_display.png")]
     
-    #global annotation_image_thread_display
-    #annotation_image_thread_display = Thread(target=camera.capture_picture, args=[annotation_image_path])
-    #annotation_image_thread_display.start()
+    # global camera_display_image_thread
+    # camera_display_image_thread = Thread(target=camera.capture_picture, args=[camera_display_image_path])
+    # camera_display_image_thread.start()
+    # camera.capture_picture(camera_display_image_path)
 
     
     def open_image():

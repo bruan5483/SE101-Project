@@ -22,6 +22,7 @@ def init_cam():
 
 
 def capture_picture(image_paths):
+    # print(image_paths)
     cam = init_cam()
     if not (cam.isOpened()):
         print("Not open")
