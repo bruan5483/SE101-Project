@@ -1,4 +1,5 @@
 from google.cloud import vision
+import os
 
 
 # from logger_config import log_function_calls
@@ -8,8 +9,11 @@ from google.cloud import vision
 
 # @log_function_calls()
 def getText(path, output_file):
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/ronak/Desktop/project-code/utils/google_ocr_service_token.json"
+
     
     client = vision.ImageAnnotatorClient()
+    
 
     with open(path, "rb") as image_file:
         content = image_file.read()
