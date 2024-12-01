@@ -130,12 +130,11 @@ def code(filename, imageIndex):
     imageIndex = imageProcessing.validateImageIndex(CODE_IMAGES_DIR_PATH, imageIndex)
     image_path = os.path.join(STATIC_DIR_PATH, f"codeImages_pic_{imageIndex}.png")
     
-    # camera_display_image_path = [os.path.join(STATIC_DIR_PATH, "camera_display.png")]
+    camera_display_image_path = [os.path.join(STATIC_DIR_PATH, "camera_display.png")]
     
-    # global camera_display_image_thread
-    # camera_display_image_thread = Thread(target=camera.capture_picture, args=[camera_display_image_path])
-    # camera_display_image_thread.start()
-    # camera.capture_picture(camera_display_image_path)
+    global camera_display_image_thread
+    camera_display_image_thread = Thread(target=camera.capture_picture, args=[camera_display_image_path])
+    camera_display_image_thread.start()
 
     
     def open_image():
