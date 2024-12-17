@@ -14,7 +14,6 @@ import shutil
 import screenshot
 import imageProcessing
 import buffer
-import keyboard
 import camera
 import mergeFile
 
