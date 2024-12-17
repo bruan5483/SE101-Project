@@ -65,3 +65,5 @@ def generateToMerge(ocr_file, img_directory, tomerge_path):
 #                 "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\images",
 #                 TOMERGE_PATH)
 
+# parseOCR("C:\\Users\\zroy1\\SE101\\se101-team-21\\src\\tests\\regex_text.txt", 
+#          "C:\\Users\\zroy1\\SE101\\se101-team-21\\src\\tests\\regex_test_results.txt")

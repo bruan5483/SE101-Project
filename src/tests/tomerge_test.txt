@@ -1,0 +1,4 @@
+1,-1,[comment] test file[newline]
+10,-1,[comment] define function[newline]
+13,-1,[comment] call function[newline]
+1,0,[comment] image_0.png [newline]
