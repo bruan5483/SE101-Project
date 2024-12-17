@@ -10,11 +10,6 @@ import keyboard
 import time
 import buffer
 
-# from logger_config import log_function_calls
-# from logger_config import setup_logger
-
-# setup_logger()
-
 """
 Dependencies:
 - pip install pillow
@@ -47,7 +42,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
     
 
     # * Enable on prod
-    # os.system("sudo pkill code")
+    os.system("sudo pkill code")
     os.system(f"code {code_file_path}")
 
     kb = keyboard.pynputKeyboard()
@@ -61,9 +56,7 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
 
     count = 0
     prev_screenshot = None
-    first = True
 
-    # while time.time() - start_time < MAX_ELAPSED_TIME:
     while True:
         buffer.appendRequest("screenshot")
         # wait until we reach buffer
@@ -73,9 +66,6 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
         os.environ["DISPLAY"] = ":2"
         
         kb = keyboard.pynputKeyboard()
-
-        #debug
-        # print(count)
         
         if (kb.terminate):
             break
@@ -92,20 +82,17 @@ def getScreenshots(code_file_path, images_dir_path, buffer: buffer.Buffer, MAX_E
         static_img_path = os.path.join(static_dir_path, f"codeImages_pic_{count}.png")
         
         time.sleep(5.3)
-        # if not first:
+
         screenshot.save(img_path)
         screenshot.save(static_img_path)
         time.sleep(5.3)
-        # else:
-        #     first = False
+        
         kb.scroll(0, -13)
-        # time.sleep(2)
-        # pyautogui.scroll(5)
+        
         count += 1
         os.environ["DISPLAY"] = ":0"
         buffer.completeEvent()
 
-    # print("done")
 
 
 # below is an example call of the function

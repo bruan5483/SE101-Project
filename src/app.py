@@ -18,7 +18,6 @@ import keyboard
 import camera
 import mergeFile
 
-
 # Variables
 load_dotenv()
 
@@ -32,10 +31,8 @@ STATIC_DIR_PATH = os.getenv("STATIC_DIR_PATH")
 MERGE_FILE_PATH = os.getenv("MERGE_FILE_PATH")
 DRAWING_ANNOTATIONS_IMAGES_DIR_PATH=os.getenv("DRAWING_ANNOTATIONS_IMAGES_DIR_PATH")
 
-
-# end Variables
-
 app = Flask(__name__)
+# end Variables
 
 @app.route("/")
 def main():
@@ -73,7 +70,6 @@ def success():
 @app.route("/capturePicture/<filename>/<imageIndex>", methods=["POST"])
 def capturePicture(filename, imageIndex):
     annotation_image_path = os.path.join(ANNOTATIONS_IMAGES_DIR_PATH, f"img_{imageIndex}.png")
-    # print(annotation_image_path)
     annotation_static_image_path = os.path.join(STATIC_DIR_PATH, f"img_{imageIndex}.png")
     camera_display_image_path = os.path.join(STATIC_DIR_PATH, "camera_display.png")
 
@@ -83,7 +79,6 @@ def capturePicture(filename, imageIndex):
     global annotation_image_thread
     annotation_image_thread = Thread(target=camera.capture_picture, args=[paths])
     annotation_image_thread.start()
-    #camera.capture_picture(annotation_image_path)
     
     return jsonify({
         "status": "success",
@@ -94,7 +89,6 @@ def capturePicture(filename, imageIndex):
 @app.route("/mergeAnnotations/<filename>", methods=["POST"])
 def mergeAnnotations(filename):
     codefile_path = os.path.join(FILE_UPLOAD_DIR, filename)
-    #mergeFile.main(ANNOTATIONS_IMAGES_DIR_PATH, codefile_path)
 
     global merge_file_thread
     merge_file_thread = Thread(target = mergeFile.main, args=[ANNOTATIONS_IMAGES_DIR_PATH, codefile_path])
@@ -125,7 +119,6 @@ def download_image():
     
 @app.route("/code/<filename>/<imageIndex>")
 def code(filename, imageIndex):
-    
     imageIndex = int(imageIndex)
     imageIndex = imageProcessing.validateImageIndex(CODE_IMAGES_DIR_PATH, imageIndex)
     image_path = os.path.join(STATIC_DIR_PATH, f"codeImages_pic_{imageIndex}.png")
@@ -135,10 +128,8 @@ def code(filename, imageIndex):
     global camera_display_image_thread
     camera_display_image_thread = Thread(target=camera.capture_picture, args=[camera_display_image_path])
     camera_display_image_thread.start()
-
     
     def open_image():
-        # os.system("sudo pkill display")
         time.sleep(0.5)
         imageDisplay.open_image(image_path=image_path, buffer=buffer)
     
@@ -146,26 +137,13 @@ def code(filename, imageIndex):
         global open_image_thread
         open_image_thread = Thread(target=open_image)
         open_image_thread.start()
-        # open_image(image_path)
 
-    return render_template("code.html", filename=filename, imageIndex=imageIndex, maxIndex=len(os.listdir(CODE_IMAGES_DIR_PATH)),
-                        #    filepath=os.path.join("/utils/codeImages", filename)
-                        )
+    return render_template("code.html", filename=filename, imageIndex=imageIndex, maxIndex=len(os.listdir(CODE_IMAGES_DIR_PATH)))
 
 if (__name__ == "__main__"):
-    
-    #* enable on prod
-    #os.system("sudo pkill code")
-
-    # open blank image
-    # async def open_initial_image():
-    #     await imageDisplay.open_image(os.path.join(STATIC_DIR_PATH, "initial-image.png"))
-    # open_initial_image()
-    
     port = 8000
 
     imageDisplay.open_image(os.path.join(STATIC_DIR_PATH, "initial-image.png"), buffer)
-    # app.run(host="0.0.0.0", port=port)
 
     while 1:
         try: 

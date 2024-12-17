@@ -1,19 +1,10 @@
 from google.cloud import vision
 import os
 
-
-# from logger_config import log_function_calls
-# from logger_config import setup_logger
-
-# setup_logger()
-
-# @log_function_calls()
 def getText(path, output_file):
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/ronak/Desktop/project-code/utils/google_ocr_service_token.json"
-
     
     client = vision.ImageAnnotatorClient()
-    
 
     with open(path, "rb") as image_file:
         content = image_file.read()
@@ -38,4 +29,5 @@ def getText(path, output_file):
             "https://cloud.google.com/apis/design/errors".format(response.error.message)
         )
 
+# below is an example call of the function
 # getText("utils\\text\\img_0.png", "utils\\ocr.txt")

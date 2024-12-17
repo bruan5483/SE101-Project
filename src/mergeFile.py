@@ -18,16 +18,12 @@ def parse_mergefile(toedit, mergefile):
     cached_codefile=readingcode.readlines()
     readingcode.close()
 
-    # print (cached_codefile)
-
     updated_codefile=cached_codefile
 
     with open(mergefile) as tomerge:
         for line in tomerge:
             try:
-                # print(line)
                 parsedline=parse_line(line.rstrip(), toedit)
-                # print(parsedline)
                 updated_codefile=update_contents(parsedline,updated_codefile)
             except Exception as e:
                 continue
@@ -36,9 +32,8 @@ def parse_mergefile(toedit, mergefile):
     update_codefile(updated_codefile,toedit)
 
 def parse_line(l, toedit)->(int, int, str):
-    # print(l)
     splitstring=l.split(',')
-    #add error detection
+
     linenum=int(splitstring[0]) - 1 # start from 1 index for line num
     index=int(splitstring[1])
 
@@ -49,9 +44,7 @@ def parse_line(l, toedit)->(int, int, str):
     stuff=stuff.replace("[newline]", "\n")
 
     comment_char = getCommentChar(toedit)
-    stuff=stuff.replace("[comment]", comment_char) #relace with function to get correct comment characters
-
-    #add other parsing features
+    stuff=stuff.replace("[comment]", comment_char) # replace with function to get correct comment characters
 
     return (linenum,index,stuff)
 
@@ -69,6 +62,7 @@ def getCommentChar(code_file):
     language = code_file.split(".")[-1]
     if language in commentChar:
         return commentChar[language]
+    
     # default comment type 
     return " //"
 
@@ -81,18 +75,11 @@ def update_contents(tochange:tuple[int,int,str],contents):
     elif (tochange[1]==0):
         contents.insert(tochange[0],tochange[2])
     
-    #else:
-        #handle inserting to the middle of a line
-    
     return contents
 
 def update_codefile(contents,writepath):
     with open(writepath,"w") as writefile:
         writefile.writelines(contents)
-
-
-# file_to_edit="./codestuff.c"
-# parse_mergefile(file_to_edit, MERGE_FILE_PATH)
 
 
 def main(camera_dir, codefile_path):
@@ -108,7 +95,7 @@ def main(camera_dir, codefile_path):
         generateMergeFile.generateToMerge(OCR_OUTPUT_FILE_PATH, 
                                       DRAWING_ANNOTATIONS_IMAGES_DIR_PATH,
                                       MERGE_FILE_PATH)
-        # print(codefile_path, MERGE_FILE_PATH)
+        
         parse_mergefile(codefile_path, MERGE_FILE_PATH)
     except Exception as e:
         # print(e)

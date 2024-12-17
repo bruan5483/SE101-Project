@@ -1,4 +1,3 @@
-import subprocess
 import keyboard
 import time
 import os
@@ -26,8 +25,7 @@ def display_fullscreen_image(image_path):
     
     # Display the resized image
     cv2.imshow("FullScreen_Window", resized_img)
-    
-    # cv2.waitKey(10000)  # Wait for a key press
+
     cv2.waitKey()  # Wait for a key press
     cv2.destroyAllWindows()  # Close the window
 
@@ -45,14 +43,9 @@ def open_image(image_path, buffer: buffer.Buffer):
         thread = Thread(target=display_fullscreen_image, args=[image_path])
         thread.start()
 
-        # subprocess.Popen(["display", "-geometry", "1000x1000+0+0", image_path]) 
         start_time = time.time()
         while time.time()-start_time < 2:
             time.sleep(0.3)
-
-        kb = keyboard.dyanmicKeyboard()
-        # kb.pressKey_f11()
-        # kb.pressKey_esc()
         
         os.environ["DISPLAY"] = ":2"
         

@@ -1,15 +1,12 @@
 import re
 import os
 
-# TOMERGE_PATH = "utils\\tomerge.txt"
-
 def parseOCR(ocr_file, tomerge_path):
     # list in the form [line number, comment]
     changes =  []
     with open(ocr_file, 'r+') as file:
         lines = file.readlines()
         for line in lines:
-            # print(line.strip())
             # line number 
             number = re.match(r'^[^\w]*\s*(\d+)\)*', line.strip())
             if number:
@@ -26,8 +23,7 @@ def parseOCR(ocr_file, tomerge_path):
     for change in changes:
         new_lines.append(f"{change[0]},-1,[comment] {change[1]}[newline]\n")
 
-    with open(tomerge_path, 'a') as file: # change path
-        # print(new_lines)
+    with open(tomerge_path, 'a') as file:
         file.writelines(new_lines)
 
 
@@ -37,8 +33,6 @@ def parseImage(directory, tomerge_path):
     # grab path of all images in directory
     for filename in os.listdir(directory):
         try:
-            # file_path = os.path.join(directory, filename)
-            # images.append(file_path)
             images.append(filename)
         except Exception as e:
             continue
@@ -55,12 +49,11 @@ def parseImage(directory, tomerge_path):
 
 # main 
 def generateToMerge(ocr_file, img_directory, tomerge_path):
-    # print(ocr_file, img_directory, tomerge_path)
     parseOCR(ocr_file, tomerge_path)
     parseImage(img_directory, tomerge_path)
     return tomerge_path
 
-# change paths 
+
 # generateToMerge("C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\ocr.txt", 
 #                 "C:\\Users\\zroy1\\SE101\\se101-team-21\\utils\\images",
 #                 TOMERGE_PATH)
