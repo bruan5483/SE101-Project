@@ -26,6 +26,10 @@ furnished to do so, subject to the following conditions:
     contributors may be used to endorse or promote products derived from
     this software without specific prior written permission.
 
+4.  You must give any other recipients of the Work or
+    Derivative Works a copy of the opencv License
+    https://github.com/opencv/opencv/blob/master/LICENSE
+
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
