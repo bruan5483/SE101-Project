@@ -8,6 +8,7 @@ For this project, you will need:
 - Raspberry Pi (Raspbian)
 - USB Webcam
 - Monitor/Projector
+- Micro-HDMI to HDMI Cable
 
 #### Clone repository
 ```
@@ -48,7 +49,11 @@ chmod +x ./wifi_check.sh
 ```
 
 ## Usage
-Refer to usage here:
+By using this product, users agree to follow the following policies:
+1. Users must not use this product for unlawful or fraudulent purposes
+2. Users must not use our product to violate the privacy or intellectual property rights of others, or use it on data that falls under third-party copyrights
+
+Refer to example usage here:
 https://drive.google.com/file/d/1h-a4Zw946FFNwTKIcn3T0HXxlNzyXM1y/view?usp=sharing
 
 ## License
