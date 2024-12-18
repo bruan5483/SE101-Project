@@ -27,8 +27,9 @@ furnished to do so, subject to the following conditions:
     this software without specific prior written permission.
 
 4.  You must give any other recipients of the Work or
-    Derivative Works a copy of the opencv License
-    https://github.com/opencv/opencv/blob/master/LICENSE
+    Derivative Works a copy of the following Licenses
+    a) https://github.com/opencv/opencv/blob/master/LICENSE
+    b) https://github.com/moses-palmer/pynput/blob/master/COPYING.LGPL
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
