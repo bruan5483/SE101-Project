@@ -41,7 +41,7 @@ Follow Google Cloud Vision setup here: https://cloud.google.com/vision/docs/setu
 Download the API_KEY and put it in ```./utils/google_ocr_service_token.json```
 
 #### Run the App
-Navigate to the shellScripts directory and run script
+Navigate to the shellScripts directory and run the script
 ```
 cd shellScripts
 chmod +x ./wifi_check.sh
